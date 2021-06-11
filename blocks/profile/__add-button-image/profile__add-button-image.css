@@ -2,3 +2,10 @@
     width: 282px;
     height: 50px;
 }
+
+@media screen and (min-width: 1024px) {
+    .profile__add-button-image {
+        width: 150px;
+        height: 50px;
+    }
+}

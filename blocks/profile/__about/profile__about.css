@@ -6,3 +6,11 @@
     color: #FFFFFF;
     margin: 0 0 36px 0;
 }
+
+@media screen and (min-width: 1024px) {
+    .profile__about {
+        font-size: 18px;
+        line-height: 1.22;
+        margin: 0;
+    }
+}
