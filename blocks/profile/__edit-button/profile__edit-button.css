@@ -1,4 +1,6 @@
 .profile__edit-button {
     background: none;
     border: none;
+    width: 18px;
+    height: 18px;
 }
