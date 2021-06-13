@@ -7,6 +7,7 @@
 
 @media screen and (min-width: 1024px) {
     .profile {
+        padding-top: 40px;
         max-width: 880px;
         flex-direction: row;
         justify-content: space-between;
