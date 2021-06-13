@@ -1,13 +1,16 @@
 .profile__add-button {
-    background-image: url("../../../images/Add Button.png");
     width: 282px;
     height: 50px;
-    background-size: cover;
+
+    background: transparent center url("../../../images/Add Button.png");
+    background-size: auto;
+    border: none;
 }
 
 @media screen and (min-width: 1024px) {
     .profile__add-button {
-        background-image: url("../../../images/Add Button(desktop).png");
+        background: transparent center url("../../../images/Add Button(desktop).png");
+        background-size: auto;
         width: 151px;
         height: 50px;
     }
