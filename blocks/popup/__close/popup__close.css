@@ -2,8 +2,8 @@
     position: absolute;
     height: 26px;
     width: 26px;
-    top: -40px;
-    right: 0;
+    top: -45px;
+    right: 5px;
     background: transparent center url("../../../images/Close Icon.png");
     background-size: auto;
     border: none;
@@ -13,8 +13,8 @@
     .popup__close {
         height: 40px;
         width: 40px;
-        top: -47px;
-        right: -47px;
+        top: -45px;
+        right: -40px;
         background: transparent center url("../../../images/Close Icon(desktop).png");
     }
 }
