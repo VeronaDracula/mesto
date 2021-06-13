@@ -82,13 +82,14 @@
                 <button class="popup__close page__link"></button>
                 <div class="popup__content">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <div class="form">
+                    <form class="form">
                         <label for="name" class="form__label"></label>
-                        <input type="text" class="form__item" id="name" name="name" placeholder="Имя" required value="Жак-Ив Кусто">
+                        <input type="text" class="form__item form__item_name" id="name" name="name" placeholder="Имя" required value="Жак-Ив Кусто">
                         <label for="about" class="form__label"></label>
-                        <input type="text" class="form__item" id="about" name="about" placeholder="О себе" required value="Исследователь океана">
-                    </div>
-                    <button class="popup__save">Сохранить</button>
+                        <input type="text" class="form__item form__item_about" id="about" name="about" placeholder="О себе" required value="Исследователь океана">
+                        <button type="submit" class="popup__save">Сохранить</button>
+                    </form>
+
                 </div>
             </div>
         </section>
