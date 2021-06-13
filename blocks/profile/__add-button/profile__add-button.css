@@ -10,7 +10,6 @@
 @media screen and (min-width: 1024px) {
     .profile__add-button {
         background: transparent center url("../../../images/Add Button(desktop).png");
-        background-size: auto;
         width: 151px;
         height: 50px;
     }
