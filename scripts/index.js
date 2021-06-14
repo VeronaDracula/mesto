@@ -10,10 +10,17 @@ let aboutInput = popupElement.querySelector('.form__item_type_about');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 
-const togglePopupVisibility = function() {
+//функция закрытия popup
+const togglePopupClose = function() {
     popupElement.classList.toggle('popup_is-opened');
 }
 
+//функция открытие popup
+const togglePopupOpen = function() {
+    popupElement.classList.toggle('popup_is-opened');
+    nameInput.value = profileName.textContent;
+    aboutInput.value = profileAbout.textContent;
+}
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -24,12 +31,11 @@ function formSubmitHandler (evt) {
     profileName.textContent = nameInputValue;
     profileAbout.textContent = aboutInputValue;
 
-    togglePopupVisibility();
+    togglePopupClose();
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
-
-popupOpenButtonElement.addEventListener('click', togglePopupVisibility);
-popupCloseButtonElement.addEventListener('click', togglePopupVisibility);
+popupOpenButtonElement.addEventListener('click', togglePopupOpen);
+popupCloseButtonElement.addEventListener('click', togglePopupClose);
 
 
