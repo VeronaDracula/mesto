@@ -15,7 +15,7 @@ const togglePopupClose = function() {
     popupElement.classList.toggle('popup_is-opened');
 }
 
-//функция открытие popup
+//функция открытия popup
 const togglePopupOpen = function() {
     popupElement.classList.toggle('popup_is-opened');
     nameInput.value = profileName.textContent;
