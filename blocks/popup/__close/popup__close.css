@@ -4,7 +4,7 @@
     width: 26px;
     top: -45px;
     right: 5px;
-    background: transparent center url("../../../images/Close Icon.png");
+    background: transparent center no-repeat url("../../../images/Close Icon.svg");
     background-size: auto;
     border: none;
 }
@@ -14,6 +14,6 @@
         height: 40px;
         width: 40px;
         right: -40px;
-        background: transparent center url("../../../images/Close Icon(desktop).png");
+        background: transparent center no-repeat url("../../../images/Close Icon (desktop).svg");
     }
 }
