@@ -11,9 +11,7 @@
     <div class="page__content">
         <header class="header">
             <img class="logo" src="images/logo.svg" alt="логотип">
-            <div class="header__line"></div>
         </header>
-
 
         <main class="content">
             <section class="profile">
@@ -22,12 +20,12 @@
                     <div class="profile__text">
                         <div class="profile__name-edit">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <button class="profile__edit-button page__link"></button>
+                            <button class="profile__edit-button page__button" type="button"></button>
                         </div>
                         <p class="profile__about">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="profile__add-button page__link"></button>
+                <button class="profile__add-button page__button" type="button"></button>
             </section>
 
             <section class="gallery">
@@ -36,42 +34,42 @@
                         <img class="card__image" src="images/karachaevsk.png" alt="Карачаевск">
                         <div class="card__image-info">
                             <h2 class="card__title">Карачаево-Черкесия</h2>
-                            <button class="card__like"></button>
+                            <button class="card__like" type="button"></button>
                         </div>
                     </li>
                     <li class="card">
                         <img class="card__image" src="images/elbrus.png" alt="Эльбрус">
                         <div class="card__image-info">
                             <h2 class="card__title">Гора Эльбрус</h2>
-                            <button class="card__like"></button>
+                            <button class="card__like" type="button"></button>
                         </div>
                     </li>
                     <li class="card">
                         <img class="card__image" src="images/dombay.png" alt="Домбай">
                         <div class="card__image-info">
                             <h2 class="card__title">Домбай</h2>
-                            <button class="card__like"></button>
+                            <button class="card__like" type="button"></button>
                         </div>
                     </li>
                     <li class="card">
                         <img class="card__image" src="images/elbrus.png" alt="Эльбрус">
                         <div class="card__image-info">
                             <h2 class="card__title">Гора Эльбрус</h2>
-                            <button class="card__like"></button>
+                            <button class="card__like" type="button"></button>
                         </div>
                     </li>
                     <li class="card">
                         <img class="card__image" src="images/dombay.png" alt="Карачаевск">
                         <div class="card__image-info">
                             <h2 class="card__title">Домбай</h2>
-                            <button class="card__like"></button>
+                            <button class="card__like" type="button"></button>
                         </div>
                     </li>
                     <li class="card">
                         <img class="card__image" src="images/karachaevsk.png" alt="Домбай">
                         <div class="card__image-info">
                             <h2 class="card__title">Карачаево-Черкесия</h2>
-                            <button class="card__like"></button>
+                            <button class="card__like" type="button"></button>
                         </div>
                     </li>
                 </ul>
@@ -80,15 +78,15 @@
 
         <section class="popup">
             <div class="popup__container">
-                <button class="popup__close page__link"></button>
+                <button class="popup__close page__button"></button>
                 <div class="popup__content">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="form">
+                    <form class="form" name="data">
                         <label for="name" class="form__label"></label>
-                        <input type="text" class="form__item form__item_name" id="name" name="name" placeholder="Имя" required value="Жак-Ив Кусто">
+                        <input type="text" class="form__item form__item_type_name" id="name" name="name" placeholder="Имя" required value="Жак-Ив Кусто">
                         <label for="about" class="form__label"></label>
-                        <input type="text" class="form__item form__item_about" id="about" name="about" placeholder="О себе" required value="Исследователь океана">
-                        <button type="submit" class="popup__save">Сохранить</button>
+                        <input type="text" class="form__item form__item_type_about" id="about" name="about" placeholder="О себе" required value="Исследователь океана">
+                        <button type="submit" class="form__save">Сохранить</button>
                     </form>
 
                 </div>
