@@ -1,7 +1,7 @@
 //элементы popup__profile
 const popupProfileOpenButtonElement = document.querySelector('.profile__edit-button');
 
-const popupProfileElement = document.querySelector('.popup');
+const popupProfileElement = document.querySelector('.popup_type_profile');
 const popupProfileCloseButtonElement = popupProfileElement.querySelector('.popup__close');
 
 const formElement = popupProfileElement.querySelector('.form');
@@ -14,7 +14,7 @@ const profileAbout = document.querySelector('.profile__about');
 //элементы popup__card
 const popupCardOpenButtonElement = document.querySelector('.profile__add-button');
 
-const popupCardElement = document.querySelector('.popup__card');
+const popupCardElement = document.querySelector('.popup_type_card');
 const popupCardCloseButtonElement = popupCardElement.querySelector('.popup__close');
 
 const cardTemplateContent = document.querySelector('.card-template').content;
