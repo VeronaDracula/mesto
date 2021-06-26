@@ -99,12 +99,17 @@ const linkInput = popupPhotoElement.querySelector('.form__item_type_link');
 //удаление карточки
 function handleDelete(event) {
     event.target.closest('.card').remove();
-
 }
 
-//обработчик для кнопки delete
+//ставим лайк
+function handleLike(event) {
+    event.target.classList.toggle('card__like_active');
+}
+
+//обработчик для кнопок внутри карточек
 function setEventListeners(cardElement) {
     cardElement.querySelector('.card__delete').addEventListener('click', handleDelete);
+    cardElement.querySelector('.card__like').addEventListener('click', handleLike);
 }
 
 
