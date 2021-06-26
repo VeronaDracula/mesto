@@ -30,61 +30,23 @@
 
             <section class="gallery">
                 <ul class="cards">
-                    <li class="card">
-                        <button class="card__delete page__button" type="button"></button>
-                        <img class="card__image" src="images/karachaevsk.png" alt="Карачаевск">
-                        <div class="card__image-info">
-                            <h2 class="card__title">Карачаево-Черкесия</h2>
-                            <button class="card__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <button class="card__delete page__button" type="button"></button>
-                        <img class="card__image" src="images/elbrus.png" alt="Эльбрус">
-                        <div class="card__image-info">
-                            <h2 class="card__title">Гора Эльбрус</h2>
-                            <button class="card__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <button class="card__delete page__button" type="button"></button>
-                        <img class="card__image" src="images/dombay.png" alt="Домбай">
-                        <div class="card__image-info">
-                            <h2 class="card__title">Домбай</h2>
-                            <button class="card__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <button class="card__delete page__button" type="button"></button>
-                        <img class="card__image" src="images/elbrus.png" alt="Эльбрус">
-                        <div class="card__image-info">
-                            <h2 class="card__title">Гора Эльбрус</h2>
-                            <button class="card__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <button class="card__delete page__button" type="button"></button>
-                        <img class="card__image" src="images/dombay.png" alt="Карачаевск">
-                        <div class="card__image-info">
-                            <h2 class="card__title">Домбай</h2>
-                            <button class="card__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <button class="card__delete page__button" type="button"></button>
-                        <img class="card__image" src="images/karachaevsk.png" alt="Домбай">
-                        <div class="card__image-info">
-                            <h2 class="card__title">Карачаево-Черкесия</h2>
-                            <button class="card__like" type="button"></button>
-                        </div>
-                    </li>
+                    <template class="card-template">
+                        <li class="card">
+                            <button class="card__delete page__button" type="button"></button>
+                            <img class="card__image" src="" alt="">
+                            <div class="card__image-info">
+                                <h2 class="card__title"></h2>
+                                <button class="card__like" type="button"></button>
+                            </div>
+                        </li>
+                    </template>
                 </ul>
             </section>
         </main>
 
-        <section class="popup">
+        <section class="popup popup__profile">
             <div class="popup__container">
-                <button class="popup__close page__button"></button>
+                <button class="popup__close popup__close_type_profile page__button"></button>
                 <div class="popup__content">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <form class="form" name="data">
@@ -92,9 +54,24 @@
                         <input type="text" class="form__item form__item_type_name" id="name" name="name" placeholder="Имя" required>
                         <label for="about" class="form__label"></label>
                         <input type="text" class="form__item form__item_type_about" id="about" name="about" placeholder="О себе" required>
+                        <button type="submit" class="form__save ">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="popup popup__photo">
+            <div class="popup__container">
+                <button class="popup__close popup__close_type_photo page__button"></button>
+                <div class="popup__content">
+                    <h2 class="popup__title">Новое место</h2>
+                    <form class="form" name="data">
+                        <label for="photo-name" class="form__label"></label>
+                        <input type="text" class="form__item form__item_type_photo-name" id="photo-name" name="photo-name" placeholder="Название" required>
+                        <label for="link" class="form__label"></label>
+                        <input type="text" class="form__item form__item_type_link" id="link" name="link" placeholder="Ссылка на картинку" required>
                         <button type="submit" class="form__save">Сохранить</button>
                     </form>
-
                 </div>
             </div>
         </section>
