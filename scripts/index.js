@@ -17,7 +17,7 @@ const popupPhotoOpenButtonElement = document.querySelector('.profile__add-button
 const popupPhotoElement = document.querySelector('.popup__photo');
 const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup__close');
 
-//let photoNameInput  = popupElement.querySelector('.form__item_type_photo-name');
+//let photoNameInput  = popupPhotoElement.querySelector('.form__item_type_photo-name');
 //let linkInput = popupElement.querySelector('.form__item_type_link');
 //const photoName = document.querySelector('.card__title');
 //const linkPhoto = document.querySelector('img').getAttribute('src');
@@ -93,24 +93,37 @@ const initialCards = [
 const cardTemplateContent = document.querySelector('.card-template').content;
 const cardsElement = document.querySelector('.cards');
 const formPhotoElement = popupPhotoElement.querySelector('.form');
-const formPhotoSubmitElement = popupPhotoElement.querySelector('.form__save');
 const photoNameInput  = popupPhotoElement.querySelector('.form__item_type_photo-name');
 const linkInput = popupPhotoElement.querySelector('.form__item_type_link');
 
+//удаление карточки
+function handleDelete(event) {
+    event.target.closest('.card').remove();
+
+}
+
+//обработчик для кнопки delete
+function setEventListeners(cardElement) {
+    cardElement.querySelector('.card__delete').addEventListener('click', handleDelete);
+}
+
 
 //загузка карточек
-function renderCard(text, image) {
+function renderCard(title, image) {
     const cardElement = cardTemplateContent.cloneNode(true);
     const cardTitleElement = cardElement.querySelector('.card__title');
-
     const cardImageElement = cardElement.querySelector('.card__image');
-    cardImageElement.setAttribute('src', image);
 
-    cardTitleElement.textContent = text;
+    cardImageElement.setAttribute('src', image);
+    cardImageElement.setAttribute('alt', title);
+    cardTitleElement.textContent = title;
+
+    setEventListeners(cardElement);
 
     cardsElement.appendChild(cardElement);
 }
 
+//добавдение данных из массива в карточки
 function renderCards(cards) {
     cards.forEach(function (card) {
         renderCard(card['name'], card['link']);
@@ -124,7 +137,24 @@ renderCards(initialCards);
 
 
 
+//добавление новой карточки на страницу
+function formPhotoSubmitHandler (evt) {
+    evt.preventDefault();
 
+    const cardElement = cardTemplateContent.cloneNode(true);
+    const cardTitleElement = cardElement.querySelector('.card__title');
+    const cardImageElement = cardElement.querySelector('.card__image');
+
+    cardTitleElement.textContent = photoNameInput.value;
+    cardImageElement.setAttribute('src', linkInput.value);
+    console.log(linkInput.value);
+
+    cardsElement.prepend(cardElement);
+
+    togglePopupPhotoClose();
+}
+
+formPhotoElement.addEventListener('submit', formPhotoSubmitHandler);
 
 
 
