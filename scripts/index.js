@@ -4,9 +4,9 @@ const popupProfileOpenButtonElement = document.querySelector('.profile__edit-but
 const popupProfileElement = document.querySelector('.popup');
 const popupProfileCloseButtonElement = popupProfileElement.querySelector('.popup__close');
 
-let formElement = popupProfileElement.querySelector('.form');
-let nameInput  = popupProfileElement.querySelector('.form__item_type_name');
-let aboutInput = popupProfileElement.querySelector('.form__item_type_about');
+const formElement = popupProfileElement.querySelector('.form');
+const nameInput  = popupProfileElement.querySelector('.form__item_type_name');
+const aboutInput = popupProfileElement.querySelector('.form__item_type_about');
 
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
@@ -29,7 +29,7 @@ const cardImageElement = cardElement.querySelector('.card__image');
 
 
 // элементы popup-photo
-const popupPhotoElement = document.querySelector('.popup__photo');
+const popupPhotoElement = document.querySelector('.popup-photo');
 const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
 const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
 const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup-photo__close');
@@ -71,7 +71,7 @@ function formSubmitHandler (evt) {
 }
 
 
-//массав начальных карточек
+//массив начальных карточек
 const initialCards = [
     {
         name: 'Архыз',
@@ -111,14 +111,14 @@ function handleLike(event) {
 
 //функция открытия popup__photo
 function togglePopupPhotoOpen(event) {
-    popupPhotoElement.classList.toggle('popup_is-opened');
+    popupPhotoElement.classList.toggle('popup-photo_is-opened');
 
     imageElement.setAttribute('src', event.target.getAttribute('src'));
     imageTitleElement.textContent = event.target.getAttribute('alt');
 }
 //закрытие popup__photo
 const togglePopupPhotoClose = function() {
-    popupPhotoElement.classList.toggle('popup_is-opened');
+    popupPhotoElement.classList.toggle('popup-photo_is-opened');
 }
 
 
@@ -156,9 +156,6 @@ function renderCards(cards) {
 renderCards(initialCards);
 
 
-
-
-
 //добавление новой карточки на страницу
 function formPhotoSubmitHandler (evt) {
     evt.preventDefault();
@@ -166,6 +163,8 @@ function formPhotoSubmitHandler (evt) {
     cardTitleElement.textContent = photoNameInput.value;
     cardImageElement.setAttribute('src', linkInput.value);
     console.log(linkInput.value);
+
+    setEventListeners(cardElement);
 
     cardsElement.prepend(cardElement);
 
