@@ -153,23 +153,16 @@ initialCards.forEach(function (initialCard) {
     addCard(cardsElement, card);
 })
 
-
-
-
 //добавление новой карточки на страницу
 function formPhotoSubmitHandler (evt) {
     evt.preventDefault();
 
-    cardTitleElement.textContent = photoNameInput.value;
-    cardImageElement.setAttribute('src', linkInput.value);
-
-    setEventListeners(cardElement);
-
-    cardsElement.prepend(cardElement);
+    cardsElement.prepend(renderCard(photoNameInput.value, linkInput.value));
 
     togglePopupClose(evt);
-}
 
+    formCardElement.reset();
+}
 
 
 
