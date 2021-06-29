@@ -108,6 +108,7 @@ function handleLike(event) {
 //загрузка данных popup__photo
 function loadPopupPhotoData(event) {
     imageElement.setAttribute('src', event.target.getAttribute('src'));
+    imageElement.setAttribute('alt', event.target.getAttribute('alt'));
     imageTitleElement.textContent = event.target.getAttribute('alt');
 }
 
