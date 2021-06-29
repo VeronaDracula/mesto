@@ -93,8 +93,6 @@ function formSubmitHandler (evt) {
 }
 
 
-
-
 //удаление карточки
 function handleDelete(event) {
     event.target.closest('.card').remove();
@@ -165,8 +163,10 @@ function formPhotoSubmitHandler (evt) {
 
 
 formElement.addEventListener('submit', formSubmitHandler);
-popupProfileOpenButtonElement.addEventListener('click', () => popupOpen(popupProfileElement));
-popupProfileOpenButtonElement.addEventListener('click', loadProfileData);
+popupProfileOpenButtonElement.addEventListener('click', () => {
+    popupOpen(popupProfileElement);
+    loadProfileData();
+});
 popupProfileCloseButtonElement.addEventListener('click', () => popupClose(popupProfileElement));
 
 formCardElement.addEventListener('submit', formPhotoSubmitHandler);
