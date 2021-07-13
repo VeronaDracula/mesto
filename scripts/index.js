@@ -1,3 +1,4 @@
+const popupElements = Array.from(document.querySelectorAll('.popup'));
 //элементы popup__profile
 const popupProfileOpenButtonElement = document.querySelector('.profile__edit-button');
 
@@ -23,9 +24,8 @@ const formCardElement = popupCardElement.querySelector('.form');
 const photoNameInput  = popupCardElement.querySelector('.form__item_type_photo-name');
 const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
-const cardElement = cardTemplateContent.cloneNode(true);
-const cardTitleElement = cardElement.querySelector('.card__title');
-const cardImageElement = cardElement.querySelector('.card__image');
+
+
 
 
 // элементы popup-photo
@@ -66,6 +66,24 @@ const initialCards = [
 //функция закрытия popup
 function popupClose (popup){
     popup.classList.remove('popup_is-opened');
+}
+
+// закрытие popup по Esc
+function keyHandler(evt) {
+    popupElements.forEach ((popupElement) => {
+        if (evt.key === 'Escape') {
+            popupClose(popupElement);
+        }
+    });
+}
+
+//закрытие по overlay
+function closePopupByClickOverlay(evt) {
+    popupElements.forEach ((popupElement) => {
+        if (evt.target === evt.currentTarget){
+            popupClose(popupElement);
+        }
+    });
 }
 
 //функция открытия popup
@@ -174,6 +192,16 @@ popupCardOpenButtonElement.addEventListener('click', () => popupOpen(popupCardEl
 popupCardCloseButtonElement.addEventListener('click', () => popupClose(popupCardElement));
 
 popupPhotoCloseButtonElement.addEventListener('click', () => popupClose(popupPhotoElement));
+
+document.addEventListener('keydown', keyHandler);
+
+popupElements.forEach ((popupElement) => {
+    popupElement.addEventListener('click', closePopupByClickOverlay);
+});
+
+
+
+
 
 
 
