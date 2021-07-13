@@ -24,7 +24,9 @@ const formCardElement = popupCardElement.querySelector('.form');
 const photoNameInput  = popupCardElement.querySelector('.form__item_type_photo-name');
 const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
-
+const cardElement = cardTemplateContent.cloneNode(true);
+const cardTitleElement = cardElement.querySelector('.card__title');
+const cardImageElement = cardElement.querySelector('.card__image');
 
 
 
