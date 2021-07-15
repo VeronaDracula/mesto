@@ -16,7 +16,8 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
 
 //проверка валидности
 const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
-    if (!inputElement.validity.valid) {
+    if (!inputElement.validity.valid){
+
         showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
     }
     else {
@@ -78,3 +79,25 @@ enableValidation({
     inputErrorClass: 'form__item_type_error',
     errorClass: 'form__input-error_active'
 });
+
+
+function disableSubmitButton(popup) {
+    const saveButtonElement = popup.querySelector('.form__save');
+    saveButtonElement.setAttribute('disabled', true);
+    saveButtonElement.classList.add('form__save_inactive');
+}
+
+
+//удаление ошибок обозначений ошибок валидации
+function clearValidationErrors (popup) {
+    const errorTexts = Array.from(popup.querySelectorAll('.form__input-error'));
+    errorTexts.forEach ((errorText) => {
+        errorText.textContent = '';
+        errorText.classList.remove('form__input-error_active');
+    });
+
+    const inputElements = Array.from(popup.querySelectorAll('.form__item'));
+    inputElements.forEach ((inputElement) => {
+        inputElement.classList.remove('form__item_type_error');
+    });
+}
