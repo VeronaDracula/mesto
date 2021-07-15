@@ -80,7 +80,7 @@ enableValidation({
     errorClass: 'form__input-error_active'
 });
 
-
+//дизактивация кнопки 'Сохранить'
 function disableSubmitButton(popup) {
     const saveButtonElement = popup.querySelector('.form__save');
     saveButtonElement.setAttribute('disabled', true);
@@ -88,7 +88,7 @@ function disableSubmitButton(popup) {
 }
 
 
-//удаление ошибок обозначений ошибок валидации
+//удаление обозначений ошибок валидации
 function clearValidationErrors (popup) {
     const errorTexts = Array.from(popup.querySelectorAll('.form__input-error'));
     errorTexts.forEach ((errorText) => {

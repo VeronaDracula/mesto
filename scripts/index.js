@@ -172,8 +172,6 @@ popupCardCloseButtonElement.addEventListener('click', () => closePopup(popupCard
 
 popupPhotoCloseButtonElement.addEventListener('click', () => closePopup(popupPhotoElement));
 
-
-
 popupElements.forEach ((popupElement) => {
     popupElement.addEventListener('click', closePopupByClickOverlay);
 });
