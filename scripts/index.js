@@ -37,7 +37,6 @@ const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup-pho
 function closePopup (popup){
     popup.classList.remove('popup_is-opened');
     document.removeEventListener('keydown', closeByEsc);
-    formCardElement.reset();
 }
 
 // закрытие popup по Esc
@@ -167,6 +166,7 @@ popupCardOpenButtonElement.addEventListener('click', () => {
     openPopup(popupCardElement);
     disableSubmitButton(popupCardElement);
     clearValidationErrors(popupCardElement);
+    formCardElement.reset();
 });
 popupCardCloseButtonElement.addEventListener('click', () => closePopup(popupCardElement));
 
