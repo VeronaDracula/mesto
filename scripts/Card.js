@@ -23,6 +23,7 @@ export class Card {
         return cardElement;
     }
 
+    //создание карточки
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
@@ -37,6 +38,7 @@ export class Card {
         return this._element
     }
 
+    //обработчик для кнопок внутри карточки
     _setEventListeners() {
         const cardImageElement = this._element.querySelector('.card__image');
 

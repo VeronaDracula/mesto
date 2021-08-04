@@ -1,3 +1,5 @@
+export {FormValidator, dataClasses};
+
 const dataClasses = {
     formSelector: '.form',
     inputSelector: '.form__item',
@@ -31,6 +33,7 @@ class FormValidator {
         this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     }
 
+    // показывать ошибку
     _showInputError (inputElement, errorMessage) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.add(this._inputErrorClass);
@@ -38,6 +41,7 @@ class FormValidator {
         errorElement.classList.add(this._errorClass);
     }
 
+    //убирать ошибку
     _hideInputError (inputElement) {
         const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.remove(this._inputErrorClass);
@@ -45,6 +49,7 @@ class FormValidator {
         errorElement.classList.remove(this._errorClass);
     }
 
+    //проверка валидности
     _checkInputValidity (inputElement) {
         if (!inputElement.validity.valid){
 
@@ -55,6 +60,7 @@ class FormValidator {
         }
     }
 
+    //статус кнопки
     _toggleButtonState () {
         const hasNotValidInput = this._inputList.some(
             (inputElement) => !inputElement.validity.valid
@@ -95,5 +101,3 @@ class FormValidator {
 
 
 
-
-export {FormValidator, dataClasses};

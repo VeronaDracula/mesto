@@ -1,3 +1,5 @@
+export {closePopup, closePopupByClickOverlay, openPopup}
+
 //функция закрытия popup
 function closePopup (popup){
     popup.classList.remove('popup_is-opened');
@@ -26,4 +28,3 @@ function openPopup(popup){
     document.addEventListener('keydown', closeByEsc);
 }
 
-export {closePopup, closePopupByClickOverlay, openPopup}
