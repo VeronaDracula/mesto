@@ -1,3 +1,8 @@
+import {initialCards} from './initial-cards.js'
+import {Card} from './Card.js'
+import {closePopup, closePopupByClickOverlay, openPopup} from './open-closePopup.js'
+
+
 const popupElements = Array.from(document.querySelectorAll('.popup'));
 
 //элементы popup__profile
@@ -27,12 +32,12 @@ const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
 // элементы popup-photo
 const popupPhotoElement = document.querySelector('.popup_type_photo');
-const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
-const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
+//const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
+//const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
 const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup-photo__close');
 
 
-
+/*
 //функция закрытия popup
 function closePopup (popup){
     popup.classList.remove('popup_is-opened');
@@ -60,6 +65,7 @@ function openPopup(popup){
     popup.classList.add('popup_is-opened');
     document.addEventListener('keydown', closeByEsc);
 }
+ */
 
 //загрузка данных в input popup-profile
 const loadProfileData = function () {
@@ -80,24 +86,12 @@ function submitEditProfileForm (evt) {
     closePopup(popupProfileElement);
 }
 
-
-//удаление карточки
-function handleDelete(event) {
-    event.target.closest('.card').remove();
-}
-
-//ставим лайк
-function handleLike(event) {
-    event.target.classList.toggle('card__like_active');
-}
-
 //загрузка данных popup__photo
-function loadPopupPhotoData(event) {
+/*function loadPopupPhotoData(event) {
     imageElement.setAttribute('src', event.target.getAttribute('src'));
     imageElement.setAttribute('alt', event.target.getAttribute('alt'));
     imageTitleElement.textContent = event.target.getAttribute('alt');
-}
-
+}*/
 
 //добавление новой карточки на страницу
 function formPhotoSubmitHandler (evt) {
@@ -112,10 +106,7 @@ function formPhotoSubmitHandler (evt) {
     formCardElement.reset();
 }
 
-
-//создание карточки
-class Card {
-
+/*class Card {
     constructor(name, link, cardSelector) {
         this._name = name;
         this._link = link;
@@ -133,7 +124,6 @@ class Card {
     }
 
     generateCard() {
-
         this._element = this._getTemplate();
         this._setEventListeners();
 
@@ -148,16 +138,38 @@ class Card {
     }
 
     _setEventListeners() {
-
         const cardImageElement = this._element.querySelector('.card__image');
 
-        this._element.querySelector('.card__delete').addEventListener('click', handleDelete);
-        this._element.querySelector('.card__like').addEventListener('click', handleLike);
+        this._element.querySelector('.card__delete').addEventListener('click', (evt) => {
+            evt.target.closest('.card').remove();
+        });
+        this._element.querySelector('.card__like').addEventListener('click', (evt) => {
+            evt.target.classList.toggle('card__like_active');
+        });
         cardImageElement.addEventListener('click', () => openPopup(popupPhotoElement));
-        cardImageElement.addEventListener('click', loadPopupPhotoData);
-    }
 
+        cardImageElement.addEventListener('click', (evt) => {
+            imageElement.setAttribute('src', evt.target.getAttribute('src'));
+            imageElement.setAttribute('alt', evt.target.getAttribute('alt'));
+            imageTitleElement.textContent = evt.target.getAttribute('alt');
+
+        });
+    }
+}*/
+
+/*//удаление карточки
+function handleDelete(event) {
+    event.target.closest('.card').remove();
 }
+
+//ставим лайк
+function handleLike(event) {
+    event.target.classList.toggle('card__like_active');
+}*/
+
+
+
+
 
 //получение данных из коллекции
 initialCards.forEach(function (initialCard) {
@@ -167,6 +179,7 @@ initialCards.forEach(function (initialCard) {
 
     addCard(cardsElement, card.generateCard());
 })
+
 
 //добавление карточек в контейнер
 function addCard (container, cardElement){
@@ -198,6 +211,9 @@ popupPhotoCloseButtonElement.addEventListener('click', () => closePopup(popupPho
 popupElements.forEach ((popupElement) => {
     popupElement.addEventListener('click', closePopupByClickOverlay);
 });
+
+
+
 
 
 
