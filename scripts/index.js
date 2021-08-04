@@ -33,8 +33,6 @@ const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
 // элементы popup-photo
 const popupPhotoElement = document.querySelector('.popup_type_photo');
-const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
-const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
 const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup-photo__close');
 
 
