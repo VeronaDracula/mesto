@@ -1,6 +1,7 @@
 import {initialCards} from './initial-cards.js'
 import {Card} from './Card.js'
 import {closePopup, closePopupByClickOverlay, openPopup} from './open-closePopup.js'
+import {FormValidator, dataClasses} from './FormValidator.js'
 
 
 const popupElements = Array.from(document.querySelectorAll('.popup'));
@@ -32,8 +33,8 @@ const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
 // элементы popup-photo
 const popupPhotoElement = document.querySelector('.popup_type_photo');
-//const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
-//const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
+const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
+const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
 const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup-photo__close');
 
 
@@ -65,8 +66,8 @@ function openPopup(popup){
     popup.classList.add('popup_is-opened');
     document.addEventListener('keydown', closeByEsc);
 }
- */
 
+*/
 //загрузка данных в input popup-profile
 const loadProfileData = function () {
     nameInput.value = profileName.textContent;
@@ -85,13 +86,6 @@ function submitEditProfileForm (evt) {
 
     closePopup(popupProfileElement);
 }
-
-//загрузка данных popup__photo
-/*function loadPopupPhotoData(event) {
-    imageElement.setAttribute('src', event.target.getAttribute('src'));
-    imageElement.setAttribute('alt', event.target.getAttribute('alt'));
-    imageTitleElement.textContent = event.target.getAttribute('alt');
-}*/
 
 //добавление новой карточки на страницу
 function formPhotoSubmitHandler (evt) {
@@ -157,20 +151,6 @@ function formPhotoSubmitHandler (evt) {
     }
 }*/
 
-/*//удаление карточки
-function handleDelete(event) {
-    event.target.closest('.card').remove();
-}
-
-//ставим лайк
-function handleLike(event) {
-    event.target.classList.toggle('card__like_active');
-}*/
-
-
-
-
-
 //получение данных из коллекции
 initialCards.forEach(function (initialCard) {
     const name = initialCard.name;
@@ -185,6 +165,38 @@ initialCards.forEach(function (initialCard) {
 function addCard (container, cardElement){
     container.appendChild(cardElement);
 }
+
+
+
+//дизактивация кнопки 'Сохранить'
+function disableSubmitButton(popup) {
+    const saveButtonElement = popup.querySelector('.form__save');
+    saveButtonElement.setAttribute('disabled', true);
+    saveButtonElement.classList.add('form__save_inactive');
+}
+
+
+//удаление обозначений ошибок валидации
+function clearValidationErrors (popup) {
+    const errorTexts = Array.from(popup.querySelectorAll('.form__input-error'));
+    errorTexts.forEach ((errorText) => {
+        errorText.textContent = '';
+        errorText.classList.remove('form__input-error_active');
+    });
+
+    const inputElements = Array.from(popup.querySelectorAll('.form__item'));
+    inputElements.forEach ((inputElement) => {
+        inputElement.classList.remove('form__item_type_error');
+    });
+}
+
+//запуск валидации
+const formList = Array.from(document.querySelectorAll(dataClasses.formSelector));
+
+formList.forEach((formElement) => {
+    const formValidator = new FormValidator(dataClasses, formElement)
+    formValidator.enableValidation();
+});
 
 
 
@@ -211,6 +223,105 @@ popupPhotoCloseButtonElement.addEventListener('click', () => closePopup(popupPho
 popupElements.forEach ((popupElement) => {
     popupElement.addEventListener('click', closePopupByClickOverlay);
 });
+
+
+
+
+
+/*const dataClasses = {
+    formSelector: '.form',
+    inputSelector: '.form__item',
+    submitButtonSelector: '.form__save',
+    inactiveButtonClass: 'form__save_inactive',
+    inputErrorClass: 'form__item_type_error',
+    errorClass: 'form__input-error_active'
+};
+
+class FormValidator {
+    _formElement
+    _formSelector
+    _inputSelector
+    _submitButtonSelector
+    _inactiveButtonClass
+    _inputErrorClass
+    _errorClass
+    _buttonElement
+    _inputList
+
+    constructor(dataClasses, formElement) {
+        this._formElement = formElement;
+        this._formSelector = dataClasses.formSelector;
+        this._inputSelector = dataClasses.inputSelector;
+        this._submitButtonSelector = dataClasses.submitButtonSelector;
+        this._inactiveButtonClass = dataClasses.inactiveButtonClass;
+        this._inputErrorClass = dataClasses.inputErrorClass;
+        this._errorClass = dataClasses.errorClass;
+        this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    }
+
+    _showInputError (inputElement, errorMessage) {
+        const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+        inputElement.classList.add(this._inputErrorClass);
+        errorElement.textContent = errorMessage;
+        errorElement.classList.add(this._errorClass);
+    }
+
+    _hideInputError (inputElement) {
+        const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+        inputElement.classList.remove(this._inputErrorClass);
+        errorElement.textContent = '';
+        errorElement.classList.remove(this._errorClass);
+    }
+
+    _checkInputValidity (inputElement) {
+        if (!inputElement.validity.valid){
+
+            this._showInputError(inputElement, inputElement.validationMessage);
+        }
+        else {
+            this._hideInputError(inputElement);
+        }
+    }
+
+    _toggleButtonState () {
+        const hasNotValidInput = this._inputList.some(
+            (inputElement) => !inputElement.validity.valid
+        )
+        if (hasNotValidInput) {
+            this._buttonElement.setAttribute('disabled', true);
+            this._buttonElement.classList.add(this._inactiveButtonClass);
+        }
+        else {
+            this._buttonElement.removeAttribute('disabled');
+            this._buttonElement.classList.remove(this._inactiveButtonClass);
+        }
+    }
+
+    _setEventListener () {
+        this._formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        });
+
+        const inputListIterator = (inputElement) => {
+            const handleInput = () => {
+                this._checkInputValidity(inputElement);
+                this._toggleButtonState();
+            };
+
+            inputElement.addEventListener("input", handleInput);
+        };
+
+        this._inputList.forEach(inputListIterator);
+
+        this._toggleButtonState();
+    }
+
+    enableValidation() {
+        this._setEventListener()
+    }
+}
+*/
 
 
 

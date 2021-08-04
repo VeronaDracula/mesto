@@ -1,3 +1,5 @@
+
+/*
 // показывать ошибку
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -80,6 +82,10 @@ enableValidation({
     errorClass: 'form__input-error_active'
 });
 
+
+
+
+
 //дизактивация кнопки 'Сохранить'
 function disableSubmitButton(popup) {
     const saveButtonElement = popup.querySelector('.form__save');
@@ -101,3 +107,6 @@ function clearValidationErrors (popup) {
         inputElement.classList.remove('form__item_type_error');
     });
 }
+
+*/
+
