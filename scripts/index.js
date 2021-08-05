@@ -87,35 +87,12 @@ function addCard (container, cardElement){
 }
 
 
-
-//дизактивация кнопки 'Сохранить'
-function disableSubmitButton(popup) {
-    const saveButtonElement = popup.querySelector('.form__save');
-    saveButtonElement.setAttribute('disabled', true);
-    saveButtonElement.classList.add('form__save_inactive');
-}
-
-//удаление обозначений ошибок валидации
-function clearValidationErrors (popup) {
-    const errorTexts = Array.from(popup.querySelectorAll('.form__input-error'));
-    errorTexts.forEach ((errorText) => {
-        errorText.textContent = '';
-        errorText.classList.remove('form__input-error_active');
-    });
-
-    const inputElements = Array.from(popup.querySelectorAll('.form__item'));
-    inputElements.forEach ((inputElement) => {
-        inputElement.classList.remove('form__item_type_error');
-    });
-}
-
 //запуск валидации
-const formList = Array.from(document.querySelectorAll(dataClasses.formSelector));
+const formValidatorProfile = new FormValidator(dataClasses, formEditProfile)
+formValidatorProfile.enableValidation();
 
-formList.forEach((formElement) => {
-    const formValidator = new FormValidator(dataClasses, formElement)
-    formValidator.enableValidation();
-});
+const formValidatorCard = new FormValidator(dataClasses, formCardElement)
+formValidatorCard.enableValidation();
 
 
 
@@ -123,17 +100,16 @@ formEditProfile.addEventListener('submit', submitEditProfileForm);
 popupProfileOpenButtonElement.addEventListener('click', () => {
     openPopup(popupProfileElement);
     loadProfileData();
-    disableSubmitButton(popupProfileElement);
-    clearValidationErrors(popupProfileElement);
+    formValidatorProfile.resetValidation();
+
 });
 popupProfileCloseButtonElement.addEventListener('click', () => closePopup(popupProfileElement));
 
 formCardElement.addEventListener('submit', formPhotoSubmitHandler);
 popupCardOpenButtonElement.addEventListener('click', () => {
     openPopup(popupCardElement);
-    disableSubmitButton(popupCardElement);
-    clearValidationErrors(popupCardElement);
     formCardElement.reset();
+    formValidatorCard.resetValidation();
 });
 popupCardCloseButtonElement.addEventListener('click', () => closePopup(popupCardElement));
 
