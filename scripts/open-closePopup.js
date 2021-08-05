@@ -8,17 +8,16 @@ function closePopup (popup){
 
 // закрытие popup по Esc
 function closeByEsc(evt) {
-    const popupIsOpened = document.querySelector('.popup_is-opened');
     if (evt.key === 'Escape') {
+        const popupIsOpened = document.querySelector('.popup_is-opened');
         closePopup(popupIsOpened);
     }
 }
 
 //закрытие по overlay
 function closePopupByClickOverlay(evt) {
-    const popupIsOpened = document.querySelector('.popup_is-opened');
     if (evt.target === evt.currentTarget){
-        closePopup(popupIsOpened);
+        closePopup(evt.currentTarget);
     }
 }
 

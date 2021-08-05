@@ -33,7 +33,7 @@ const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
 // элементы popup-photo
 const popupPhotoElement = document.querySelector('.popup_type_photo');
-const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup-photo__close');
+const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup__close');
 
 
 
@@ -56,13 +56,17 @@ function submitEditProfileForm (evt) {
     closePopup(popupProfileElement);
 }
 
+//создание карточки
+function createCard (link, name, template) {
+    const card = new Card(link, name, template);
+    return card.generateCard();
+}
+
 //добавление новой карточки на страницу
 function formPhotoSubmitHandler (evt) {
     evt.preventDefault();
 
-    const card = new Card(photoNameInput.value, linkInput.value, '.card-template')
-
-    cardsElement.prepend(card.generateCard());
+    cardsElement.prepend(createCard(photoNameInput.value, linkInput.value, '.card-template'));
 
     closePopup(popupCardElement);
 
@@ -73,16 +77,16 @@ function formPhotoSubmitHandler (evt) {
 initialCards.forEach(function (initialCard) {
     const name = initialCard.name;
     const link = initialCard.link;
-    const card = new Card(name, link, '.card-template')
 
-    addCard(cardsElement, card.generateCard());
+    addCard(cardsElement, createCard(name, link, '.card-template'));
 })
-
 
 //добавление карточек в контейнер
 function addCard (container, cardElement){
     container.appendChild(cardElement);
 }
+
+
 
 //дизактивация кнопки 'Сохранить'
 function disableSubmitButton(popup) {

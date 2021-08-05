@@ -48,13 +48,11 @@ export class Card {
         this._element.querySelector('.card__like').addEventListener('click', (evt) => {
             evt.target.classList.toggle('card__like_active');
         });
-        cardImageElement.addEventListener('click', () => openPopup(popupPhotoElement));
-
         cardImageElement.addEventListener('click', (evt) => {
+            openPopup(popupPhotoElement);
             imageElement.setAttribute('src', evt.target.getAttribute('src'));
             imageElement.setAttribute('alt', evt.target.getAttribute('alt'));
             imageTitleElement.textContent = evt.target.getAttribute('alt');
-
         });
     }
 }
