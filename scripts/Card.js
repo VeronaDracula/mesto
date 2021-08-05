@@ -1,16 +1,11 @@
-import {openPopup} from './open-closePopup.js'
-
 //создание карточки
 
-const popupPhotoElement = document.querySelector('.popup_type_photo');
-const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
-const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
-
 export class Card {
-    constructor(name, link, cardSelector) {
+    constructor(name, link, cardSelector, handleCardClick) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -48,11 +43,8 @@ export class Card {
         this._element.querySelector('.card__like').addEventListener('click', (evt) => {
             evt.target.classList.toggle('card__like_active');
         });
-        cardImageElement.addEventListener('click', (evt) => {
-            openPopup(popupPhotoElement);
-            imageElement.setAttribute('src', evt.target.getAttribute('src'));
-            imageElement.setAttribute('alt', evt.target.getAttribute('alt'));
-            imageTitleElement.textContent = evt.target.getAttribute('alt');
+        cardImageElement.addEventListener('click', (event) => {
+            this._handleCardClick(this._name, this._link);
         });
     }
 }

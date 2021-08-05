@@ -34,8 +34,8 @@ const linkInput = popupCardElement.querySelector('.form__item_type_link');
 // элементы popup-photo
 const popupPhotoElement = document.querySelector('.popup_type_photo');
 const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup__close');
-
-
+const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
+const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
 
 //загрузка данных в input popup-profile
 const loadProfileData = function () {
@@ -56,9 +56,17 @@ function submitEditProfileForm (evt) {
     closePopup(popupProfileElement);
 }
 
+//устанавливаем данные для popup_photo
+function handleCardClick(name, link) {
+    imageElement.setAttribute('src', link);
+    imageElement.setAttribute('alt', name);
+    imageTitleElement.textContent = name;
+    openPopup(popupPhotoElement);
+}
+
 //создание карточки
-function createCard (link, name, template) {
-    const card = new Card(link, name, template);
+function createCard (link, name, template, handleCardClick) {
+    const card = new Card(link, name, template, handleCardClick);
     return card.generateCard();
 }
 
@@ -66,7 +74,7 @@ function createCard (link, name, template) {
 function formPhotoSubmitHandler (evt) {
     evt.preventDefault();
 
-    cardsElement.prepend(createCard(photoNameInput.value, linkInput.value, '.card-template'));
+    cardsElement.prepend(createCard(photoNameInput.value, linkInput.value, '.card-template', handleCardClick));
 
     closePopup(popupCardElement);
 
@@ -78,7 +86,7 @@ initialCards.forEach(function (initialCard) {
     const name = initialCard.name;
     const link = initialCard.link;
 
-    addCard(cardsElement, createCard(name, link, '.card-template'));
+    addCard(cardsElement, createCard(name, link, '.card-template', handleCardClick));
 })
 
 //добавление карточек в контейнер
@@ -101,8 +109,8 @@ popupProfileOpenButtonElement.addEventListener('click', () => {
     openPopup(popupProfileElement);
     loadProfileData();
     formValidatorProfile.resetValidation();
-
 });
+
 popupProfileCloseButtonElement.addEventListener('click', () => closePopup(popupProfileElement));
 
 formCardElement.addEventListener('submit', formPhotoSubmitHandler);
@@ -111,6 +119,7 @@ popupCardOpenButtonElement.addEventListener('click', () => {
     formCardElement.reset();
     formValidatorCard.resetValidation();
 });
+
 popupCardCloseButtonElement.addEventListener('click', () => closePopup(popupCardElement));
 
 popupPhotoCloseButtonElement.addEventListener('click', () => closePopup(popupPhotoElement));
