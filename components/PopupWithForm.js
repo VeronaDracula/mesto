@@ -7,11 +7,7 @@ export class PopupWithForm extends Popup  {
     }
 
     _getInputValues() {
-        const nameInput  = this._popup.querySelector('.form__item_type_name');
-        const aboutInput = this._popup.querySelector('.form__item_type_about');
-
-        const nameInputValue  = nameInput.value;
-        const aboutInputValue  = aboutInput.value;
+        const popupFormsData = Array.from(this._popup.querySelectorAll('.form__item'));
     }
 
     setEventListeners() {

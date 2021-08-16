@@ -1,3 +1,4 @@
+//получение карточки и добавление ее на страницу
 export class Section {
     constructor({items, renderer}, containerSelector) {
         this._renderedItems = items;
