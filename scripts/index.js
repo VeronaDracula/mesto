@@ -1,6 +1,10 @@
 import {initialCards} from './initial-cards.js'
 import {Card} from './Card.js'
-import {closePopup, closePopupByClickOverlay, openPopup} from './open-closePopup.js'
+import {Section} from './Section.js'
+import {PopupWithImage} from './PopupWithImage.js'
+import {PopupWithForm} from './PopupWithForm.js'
+import {UserInfo} from './UserInfo.js'
+/*import {closePopup, closePopupByClickOverlay, openPopup} from './open-closePopup.js'*/
 import {FormValidator, dataClasses} from './FormValidator.js'
 
 
@@ -37,31 +41,48 @@ const popupPhotoCloseButtonElement = popupPhotoElement.querySelector('.popup__cl
 const imageElement = popupPhotoElement.querySelector('.popup-photo__image');
 const imageTitleElement = popupPhotoElement.querySelector('.popup-photo__title');
 
+
+
+
+/*
 //загрузка данных в input popup-profile
 const loadProfileData = function () {
     nameInput.value = profileName.textContent;
     aboutInput.value = profileAbout.textContent;
 }
+*/
+
+
+const ProfileInfo = new UserInfo('.profile__name', '.profile__about');
+
+ProfileInfo.getUserInfo();
+nameInput.value = ProfileInfo.getUserInfo().name;
+aboutInput.value = ProfileInfo.getUserInfo().about;
 
 // функция сохранения данных popup__profile
 function submitEditProfileForm (evt) {
     evt.preventDefault();
 
-    const nameInputValue  = nameInput.value;
+    ProfileInfo.setUserInfo(nameInput.value, aboutInput.value);
+
+    /*const nameInputValue  = nameInput.value;
     const aboutInputValue  = aboutInput.value;
 
     profileName.textContent = nameInputValue;
-    profileAbout.textContent = aboutInputValue;
+    profileAbout.textContent = aboutInputValue;*/
 
-    closePopup(popupProfileElement);
+    popupProfileForm.close();
 }
 
 //устанавливаем данные для popup_photo
 function handleCardClick(name, link) {
-    imageElement.setAttribute('src', link);
+    /*imageElement.setAttribute('src', link);
     imageElement.setAttribute('alt', name);
     imageTitleElement.textContent = name;
-    openPopup(popupPhotoElement);
+    openPopup(popupPhotoElement);*/
+    const popupImage = new PopupWithImage('.popup_type_photo', name, link);
+    popupImage.open();
+    popupPhotoCloseButtonElement.addEventListener('click', () => popupImage.setEventListeners());
 }
 
 //создание карточки
@@ -76,11 +97,12 @@ function formPhotoSubmitHandler (evt) {
 
     cardsElement.prepend(createCard(photoNameInput.value, linkInput.value, '.card-template', handleCardClick));
 
-    closePopup(popupCardElement);
+    popupCardForm.close();
 
     formCardElement.reset();
 }
 
+/*
 //получение данных из коллекции
 initialCards.forEach(function (initialCard) {
     const name = initialCard.name;
@@ -93,7 +115,7 @@ initialCards.forEach(function (initialCard) {
 function addCard (container, cardElement){
     container.appendChild(cardElement);
 }
-
+*/
 
 //запуск валидации
 const formValidatorProfile = new FormValidator(dataClasses, formEditProfile)
@@ -104,29 +126,50 @@ formValidatorCard.enableValidation();
 
 
 
-formEditProfile.addEventListener('submit', submitEditProfileForm);
+
+const CardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        CardList.addItem(createCard(item.name, item.link, '.card-template', handleCardClick));
+    }
+}, '.cards');
+
+CardList.renderItems();
+
+
+
+const popupCardForm = new PopupWithForm('.popup_type_card', formPhotoSubmitHandler);
+const popupProfileForm = new PopupWithForm('.popup_type_profile', submitEditProfileForm);
+
+popupCardForm.setEventListeners();
+popupProfileForm.setEventListeners();
+
+
+
+
+/*formEditProfile.addEventListener('submit', submitEditProfileForm);*/
 popupProfileOpenButtonElement.addEventListener('click', () => {
-    openPopup(popupProfileElement);
-    loadProfileData();
+    popupProfileForm.open();
+    /*loadProfileData();*/
     formValidatorProfile.resetValidation();
 });
 
-popupProfileCloseButtonElement.addEventListener('click', () => closePopup(popupProfileElement));
+/*popupProfileCloseButtonElement.addEventListener('click', () => ProfileForm.close());*/
 
-formCardElement.addEventListener('submit', formPhotoSubmitHandler);
+/*formCardElement.addEventListener('submit', formPhotoSubmitHandler);*/
 popupCardOpenButtonElement.addEventListener('click', () => {
-    openPopup(popupCardElement);
-    formCardElement.reset();
+    popupCardForm.open();
+    /*formCardElement.reset();*/
     formValidatorCard.resetValidation();
 });
 
-popupCardCloseButtonElement.addEventListener('click', () => closePopup(popupCardElement));
+/*popupCardCloseButtonElement.addEventListener('click', () => popupCardForm.close());*/
 
-popupPhotoCloseButtonElement.addEventListener('click', () => closePopup(popupPhotoElement));
+/*popupPhotoCloseButtonElement.addEventListener('click', () => popupImage.close());*/
 
-popupElements.forEach ((popupElement) => {
+/*popupElements.forEach ((popupElement) => {
     popupElement.addEventListener('click', closePopupByClickOverlay);
-});
+});*/
 
 
 
