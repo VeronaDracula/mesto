@@ -1,12 +1,12 @@
 import './index.css';
 
-import {initialCards} from '../utils/constants.js'
+import {initialCards, dataClasses} from '../utils/constants.js'
 import {Card} from '../components/Card.js'
 import {Section} from '../components/Section.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js'
-import {FormValidator, dataClasses} from '../components/FormValidator.js'
+import {FormValidator} from '../components/FormValidator.js'
 
 
 //элементы popup__profile
@@ -25,24 +25,24 @@ const photoNameInput  = popupCardElement.querySelector('.form__item_type_photo-n
 const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
 //объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе
-const ProfileSelectors = {
+const profileSelectors = {
     name: '.profile__name',
     about: '.profile__about'
 }
 
 
 
-const ProfileInfo = new UserInfo(ProfileSelectors);
+const profileInfo = new UserInfo(profileSelectors);
+
 //загрузка данных пользователя в форму
-ProfileInfo.getUserInfo();
-nameInput.value = ProfileInfo.getUserInfo().name;
-aboutInput.value = ProfileInfo.getUserInfo().about;
+nameInput.value = profileInfo.getUserInfo().name;
+aboutInput.value = profileInfo.getUserInfo().about;
 
 // функция сохранения данных popup__profile
 function submitEditProfileForm (evt) {
     evt.preventDefault();
 
-    ProfileInfo.setUserInfo(nameInput.value, aboutInput.value);
+    profileInfo.setUserInfo(nameInput.value, aboutInput.value);
 
     popupProfileForm.close();
 }
@@ -50,7 +50,7 @@ function submitEditProfileForm (evt) {
 //устанавливаем данные для popup_photo
 function handleCardClick(name, link) {
     const popupImage = new PopupWithImage('.popup_type_photo', name, link);
-    popupImage.open();
+    popupImage.open(name, link);
     popupImage.setEventListeners();
 }
 
@@ -81,14 +81,14 @@ formValidatorCard.enableValidation();
 
 
 //создание секции
-const CardList = new Section({
+const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        CardList.addItem(createCard(item.name, item.link, '.card-template', handleCardClick));
+        cardList.addItem(createCard(item.name, item.link, '.card-template', handleCardClick));
     }
 }, '.cards');
 
-CardList.renderItems();
+cardList.renderItems();
 
 
 
