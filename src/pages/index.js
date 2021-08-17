@@ -93,8 +93,9 @@ popupProfileForm.setEventListeners();
 
 
 popupProfileOpenButtonElement.addEventListener('click', () => {
-    nameInput.value = profileInfo.getUserInfo().name;
-    aboutInput.value = profileInfo.getUserInfo().about;
+    const profileData = profileInfo.getUserInfo()
+    nameInput.value = profileData.name;
+    aboutInput.value = profileData.about;
     popupProfileForm.open();
     formValidatorProfile.resetValidation();
 });
