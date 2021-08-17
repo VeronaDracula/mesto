@@ -1,8 +1,8 @@
 //класс работает с данными профайла
 export class UserInfo {
-    constructor(Selectors) {
-        this._nameSelector = Selectors.name;
-        this._aboutSelector = Selectors.about;
+    constructor(selectors) {
+        this._nameSelector = selectors.name;
+        this._aboutSelector = selectors.about;
 
     }
     //возвращает объект с данными пользователя

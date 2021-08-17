@@ -34,24 +34,20 @@ const profileSelectors = {
 
 const profileInfo = new UserInfo(profileSelectors);
 
-//загрузка данных пользователя в форму
-nameInput.value = profileInfo.getUserInfo().name;
-aboutInput.value = profileInfo.getUserInfo().about;
-
 // функция сохранения данных popup__profile
-function submitEditProfileForm (evt) {
-    evt.preventDefault();
-
-    profileInfo.setUserInfo(nameInput.value, aboutInput.value);
+function submitEditProfileForm (data) {
+    profileInfo.setUserInfo(data.name, data.about);
 
     popupProfileForm.close();
 }
 
+
+const popupImage = new PopupWithImage('.popup_type_photo');
+popupImage.setEventListeners();
+
 //устанавливаем данные для popup_photo
 function handleCardClick(name, link) {
-    const popupImage = new PopupWithImage('.popup_type_photo', name, link);
     popupImage.open(name, link);
-    popupImage.setEventListeners();
 }
 
 //создание карточки
@@ -61,10 +57,8 @@ function createCard (link, name, template, handleCardClick) {
 }
 
 //добавление новой карточки на страницу
-function formPhotoSubmitHandler (evt) {
-    evt.preventDefault();
-
-    cardsElement.prepend(createCard(photoNameInput.value, linkInput.value, '.card-template', handleCardClick));
+function formPhotoSubmitHandler (data) {
+    cardsElement.prepend(createCard(data.caption, data.link, '.card-template', handleCardClick));
 
     popupCardForm.close();
 
@@ -101,6 +95,8 @@ popupProfileForm.setEventListeners();
 
 
 popupProfileOpenButtonElement.addEventListener('click', () => {
+    nameInput.value = profileInfo.getUserInfo().name;
+    aboutInput.value = profileInfo.getUserInfo().about;
     popupProfileForm.open();
     formValidatorProfile.resetValidation();
 });
