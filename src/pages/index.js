@@ -21,8 +21,6 @@ const popupCardOpenButtonElement = document.querySelector('.profile__add-button'
 const popupCardElement = document.querySelector('.popup_type_card');
 const cardsElement = document.querySelector('.cards');
 const formCardElement = popupCardElement.querySelector('.form');
-const photoNameInput  = popupCardElement.querySelector('.form__item_type_photo-name');
-const linkInput = popupCardElement.querySelector('.form__item_type_link');
 
 //объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе
 const profileSelectors = {
@@ -51,14 +49,14 @@ function handleCardClick(name, link) {
 }
 
 //создание карточки
-function createCard (link, name, template, handleCardClick) {
-    const card = new Card(link, name, template, handleCardClick);
+function createCard (data, template, handleCardClick) {
+    const card = new Card(data, template, handleCardClick);
     return card.generateCard();
 }
 
 //добавление новой карточки на страницу
 function formPhotoSubmitHandler (data) {
-    cardsElement.prepend(createCard(data.caption, data.link, '.card-template', handleCardClick));
+    cardsElement.prepend(createCard(data, '.card-template', handleCardClick));
 
     popupCardForm.close();
 
@@ -78,7 +76,7 @@ formValidatorCard.enableValidation();
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        cardList.addItem(createCard(item.name, item.link, '.card-template', handleCardClick));
+        cardList.addItem(createCard(item, '.card-template', handleCardClick));
     }
 }, '.cards');
 
