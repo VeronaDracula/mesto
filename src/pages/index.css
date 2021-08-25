@@ -12,7 +12,12 @@
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__avatar-box/profile__avatar-box.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar-hover/profile__avatar-hover.css);
+@import url(../blocks/profile/__edit-avatar-button/profile__edit-avatar-button.css);
+
+
 @import url(../blocks/profile/__name-edit/profile__name-edit.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__about/profile__about.css);
