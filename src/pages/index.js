@@ -7,6 +7,7 @@ import {Popup} from '../components/Popup.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js'
+import {UserAvatar} from '../components/UserAvatar.js'
 import {FormValidator} from '../components/FormValidator.js'
 
 
@@ -25,9 +26,13 @@ const formCardElement = popupCardElement.querySelector('.form');
 
 //элементы popup_type_delete
 const popupDelete = document.querySelector('.popup_type_delete');
-const popupDeleteCardOpenElement = document.querySelector('.card__delete');
 const popupDeleteCardElement = popupDelete.querySelector('.form__save');
 
+
+//элементы popup_type_edit-avatar
+const popupEditAvatarOpenButtonElement = document.querySelector('.profile__avatar-hover');
+const popupEditAvatarElement = document.querySelector('.popup_type_edit-avatar');
+const formEditAvatarElement = popupEditAvatarElement.querySelector('.form');
 
 
 //объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе
@@ -36,6 +41,14 @@ const profileSelectors = {
     about: '.profile__about'
 }
 
+const profileAvatar = new UserAvatar('.profile__avatar')
+
+//добавление аватара
+function submitEditAvatarForm (data) {
+    profileAvatar.setUserAvatar(data.link)
+
+    popupEditAvatarForm.close();
+}
 
 
 const profileInfo = new UserInfo(profileSelectors);
@@ -93,6 +106,8 @@ formValidatorProfile.enableValidation();
 const formValidatorCard = new FormValidator(dataClasses, formCardElement)
 formValidatorCard.enableValidation();
 
+const formValidatorAvatar = new FormValidator(dataClasses, formEditAvatarElement)
+formValidatorAvatar.enableValidation();
 
 //создание секции
 const cardList = new Section({
@@ -105,10 +120,11 @@ const cardList = new Section({
 cardList.renderItems();
 
 
-
+const popupEditAvatarForm = new PopupWithForm('.popup_type_edit-avatar', submitEditAvatarForm);
 const popupCardForm = new PopupWithForm('.popup_type_card', formPhotoSubmitHandler);
 const popupProfileForm = new PopupWithForm('.popup_type_profile', submitEditProfileForm);
 
+popupEditAvatarForm.setEventListeners();
 popupCardForm.setEventListeners();
 popupProfileForm.setEventListeners();
 
@@ -126,6 +142,10 @@ popupCardOpenButtonElement.addEventListener('click', () => {
     formValidatorCard.resetValidation();
 });
 
+popupEditAvatarOpenButtonElement.addEventListener('click', () => {
+    popupEditAvatarForm.open();
+    formValidatorAvatar.resetValidation();
+});
 
 
 

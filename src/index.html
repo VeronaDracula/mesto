@@ -131,6 +131,24 @@
             </div>
         </section>
 
+        <section class="popup popup_type_edit-avatar">
+            <div class="popup__container">
+                <button class="popup__close page__button"></button>
+                <div class="popup__content">
+                    <h2 class="popup__title popup__title_type_edit-avatar">Обновить аватар</h2>
+                    <form class="form" name="data" novalidate>
+                        <div class="form__section">
+                            <label for="avatar-link" class="form__label"></label>
+                            <input type="url" class="form__item form__item_type_avatar-link" id="avatar-link" name="link"
+                                   placeholder="Ссылка на картинку" required>
+                            <span class="form__input-error" id="avatar-link-error"></span>
+                        </div>
+                        <button type="submit" class="form__save">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
