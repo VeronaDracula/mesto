@@ -36,6 +36,18 @@
                 <ul class="cards">
                     <template class="card-template">
                         <li class="card">
+                            <img class="card__image" alt=" " src=" ">
+                            <div class="card__image-info">
+                                <h2 class="card__title"></h2>
+                                <div class="card__like-box">
+                                    <button class="card__like" type="button"></button>
+                                    <p class="card__like-amount">0</p>
+                                </div>
+                            </div>
+                        </li>
+                    </template>
+                    <template class="card-template-with-delete">
+                        <li class="card">
                             <button class="card__delete page__button" type="button"></button>
                             <img class="card__image" alt=" " src=" ">
                             <div class="card__image-info">
@@ -106,6 +118,16 @@
                     <img class="popup-photo__image" alt=" " src=" ">
                     <figcaption class="popup-photo__title"></figcaption>
                 </figure>
+            </div>
+        </section>
+
+        <section class="popup popup_type_delete">
+            <div class="popup__container">
+                <button class="popup__close page__button"></button>
+                <div class="popup__content">
+                    <h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
+                    <button type="button" class="form__save form__save_type_delete">Да</button>
+                </div>
             </div>
         </section>
 

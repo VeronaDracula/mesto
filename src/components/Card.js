@@ -1,11 +1,13 @@
 //создание карточки
 
 export class Card {
-    constructor(data, cardSelector, handleCardClick) {
+    constructor(data, cardSelector, handleCardClick, deleteCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._cardSelector = cardSelector;
+        this._deleteCardClick = deleteCardClick;
         this._handleCardClick = handleCardClick;
+
     }
 
     _getTemplate() {
@@ -33,13 +35,19 @@ export class Card {
         return this._element
     }
 
+
+
     //обработчик для кнопок внутри карточки
     _setEventListeners() {
         const cardImageElement = this._element.querySelector('.card__image');
+        const cardDeleteButton = this._element.querySelector('.card__delete');
 
-        this._element.querySelector('.card__delete').addEventListener('click', (evt) => {
-            evt.target.closest('.card').remove();
-        });
+        if (cardDeleteButton) {
+            cardDeleteButton.addEventListener('click', (evt) => {
+                this._deleteCardClick(evt.target.closest('.card'));
+            });
+        }
+
         this._element.querySelector('.card__like').addEventListener('click', (evt) => {
             evt.target.classList.toggle('card__like_active');
         });
