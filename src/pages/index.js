@@ -1,6 +1,7 @@
 import './index.css';
 
-import {initialCards, dataClasses} from '../utils/constants.js'
+import {dataClasses} from '../utils/constants.js'
+import {Api} from '../components/Api.js'
 import {Card} from '../components/Card.js'
 import {Section} from '../components/Section.js'
 import {Popup} from '../components/Popup.js'
@@ -109,15 +110,24 @@ formValidatorCard.enableValidation();
 const formValidatorAvatar = new FormValidator(dataClasses, formEditAvatarElement)
 formValidatorAvatar.enableValidation();
 
-//создание секции
-const cardList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick));
-    }
-}, '.cards');
 
-cardList.renderItems();
+
+const api = new Api({
+    url: 'https://mesto.nomoreparties.co/v1/cohort-27/cards'
+})
+//создание секции
+    api
+    .getCards()
+    .then(data => {
+        const cardList = new Section({
+            items: data,
+            renderer: (item) => {
+                cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick));
+            }
+        }, '.cards');
+        cardList.renderItems();
+
+    })
 
 
 const popupEditAvatarForm = new PopupWithForm('.popup_type_edit-avatar', submitEditAvatarForm);
