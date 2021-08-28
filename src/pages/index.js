@@ -75,12 +75,20 @@ const popupDeleteCard = new Popup('.popup_type_delete');
 popupDeleteCard.setEventListeners();
 
 //удачение карточки
-function deleteCardClick(card) {
+function deleteCardClick(card, cardId) {
     popupDeleteCard.open();
+
+    /*popupDeleteCardElement.addEventListener('click', () => {
+        popupDeleteCard.close();
+        card.remove();
+    });*/
 
     popupDeleteCardElement.addEventListener('click', () => {
         popupDeleteCard.close();
-        card.remove();
+        api.deleteCardApi(cardId)
+            .then(() => {
+                card.remove();
+            })
     });
 }
 
@@ -90,14 +98,36 @@ function createCard (data, template, handleCardClick, deleteCardClick) {
     return card.generateCard();
 }
 
-//добавление новой карточки на страницу
+const api = new Api({
+    url: 'https://mesto.nomoreparties.co/v1/cohort-27/cards'
+})
+
+//добавление новой карточки на страницу и на сервер
 function formPhotoSubmitHandler (data) {
-    cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick));
+    api.createCardApi(data)
+        .then(data => {
+            console.log(data);
+            cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick));
+        })
 
     popupCardForm.close();
 
     formCardElement.reset();
 }
+
+//создание секции
+api
+    .getCards()
+    .then(data => {
+        const cardList = new Section({
+            items: data,
+            renderer: (item) => {
+                cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick));
+            }
+        }, '.cards');
+        cardList.renderItems();
+    })
+
 
 
 //запуск валидации
@@ -109,25 +139,6 @@ formValidatorCard.enableValidation();
 
 const formValidatorAvatar = new FormValidator(dataClasses, formEditAvatarElement)
 formValidatorAvatar.enableValidation();
-
-
-
-const api = new Api({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-27/cards'
-})
-//создание секции
-    api
-    .getCards()
-    .then(data => {
-        const cardList = new Section({
-            items: data,
-            renderer: (item) => {
-                cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick));
-            }
-        }, '.cards');
-        cardList.renderItems();
-
-    })
 
 
 const popupEditAvatarForm = new PopupWithForm('.popup_type_edit-avatar', submitEditAvatarForm);

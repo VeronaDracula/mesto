@@ -4,10 +4,10 @@ export class Card {
     constructor(data, cardSelector, handleCardClick, deleteCardClick) {
         this._name = data.name;
         this._link = data.link;
+        this._id = data._id;
         this._cardSelector = cardSelector;
         this._deleteCardClick = deleteCardClick;
         this._handleCardClick = handleCardClick;
-
     }
 
     _getTemplate() {
@@ -43,8 +43,8 @@ export class Card {
         const cardDeleteButton = this._element.querySelector('.card__delete');
 
         if (cardDeleteButton) {
-            cardDeleteButton.addEventListener('click', (evt) => {
-                this._deleteCardClick(evt.target.closest('.card'));
+            cardDeleteButton.addEventListener('click', () => {
+                this._deleteCardClick(this._element, this._id);
             });
         }
 

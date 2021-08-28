@@ -10,25 +10,41 @@ export class Api {
 
     getCards () {
         return fetch(this.url, {
-            headers: this.headers,
-            method: 'GET',
+            headers: this.headers
         }).then(response => {
             if (!response.ok) {
                 return Promise
                     .reject({message: 'not ok'})
             }
-            console.log(response)
-
             return response.json()
         })
             .catch(err => console.log(err))
     }
 
-    createCard () {
-
+    createCardApi (data) {
+        return fetch(this.url, {
+            headers: this.headers,
+            method: 'POST',
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            return Promise.reject("Произошла ошибка")
+        })
+            .catch(err => console.log(err))
     }
 
-    deleteCard () {
-
+    deleteCardApi (_id) {
+        return fetch(this.url + '/' + _id, {
+            headers: this.headers,
+            method: 'DELETE',
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            return Promise.reject("Произошла ошибка")
+        })
+            .catch(err => console.log(err))
     }
 }
