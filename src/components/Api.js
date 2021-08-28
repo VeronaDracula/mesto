@@ -7,6 +7,7 @@ export class Api {
     constructor(config) {
         this.urlCards = config.urlCards;
         this.urlUser = config.urlUser;
+        this.urlUserNewInfo = config.urlUserNewInfo;
     }
 
     getCards () {
@@ -58,6 +59,20 @@ export class Api {
                     .reject({message: 'not ok'})
             }
             return response.json()
+        })
+            .catch(err => console.log(err))
+    }
+
+    createNewUserInfoApi (data) {
+        return fetch(this.urlUserNewInfo, {
+            headers: this.headers,
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            return Promise.reject("Произошла ошибка")
         })
             .catch(err => console.log(err))
     }

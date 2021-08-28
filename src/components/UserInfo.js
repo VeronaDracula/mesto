@@ -4,12 +4,12 @@ export class UserInfo {
         this._nameSelector = selectors.name;
         this._aboutSelector = selectors.about;
 
-    }
-    //возвращает объект с данными пользователя
-    getUserInfo() {
         this._profileName = document.querySelector(this._nameSelector);
         this._profileAbout = document.querySelector(this._aboutSelector);
+    }
 
+    //возвращает объект с данными пользователя
+    getUserInfo() {
         return {
             name: this._profileName.textContent,
             about: this._profileAbout.textContent

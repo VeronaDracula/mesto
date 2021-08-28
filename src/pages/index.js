@@ -42,6 +42,9 @@ const profileSelectors = {
     about: '.profile__about'
 }
 
+
+
+
 const profileAvatar = new UserAvatar('.profile__avatar')
 
 //добавление аватара
@@ -51,12 +54,14 @@ function submitEditAvatarForm (data) {
     popupEditAvatarForm.close();
 }
 
-
 const profileInfo = new UserInfo(profileSelectors);
 
 // функция сохранения данных popup__profile
 function submitEditProfileForm (data) {
-    profileInfo.setUserInfo(data.name, data.about);
+    api.createNewUserInfoApi(data)
+        .then(data => {
+            profileInfo.setUserInfo(data.name, data.about);
+        })
 
     popupProfileForm.close();
 }
@@ -74,7 +79,7 @@ function handleCardClick(name, link) {
 const popupDeleteCard = new Popup('.popup_type_delete');
 popupDeleteCard.setEventListeners();
 
-//удачение карточки
+//удаление карточки
 function deleteCardClick(card, cardId) {
     popupDeleteCard.open();
 
@@ -96,7 +101,8 @@ function createCard (data, template, handleCardClick, deleteCardClick) {
 //объект с адресами для запросов
 const url = {
     urlCards: 'https://mesto.nomoreparties.co/v1/cohort-27/cards',
-    urlUser: 'https://nomoreparties.co/v1/cohort-27/users/me'
+    urlUser: 'https://nomoreparties.co/v1/cohort-27/users/me',
+    urlUserNewInfo: 'https://mesto.nomoreparties.co/v1/cohort-27/users/me'
 }
 
 
@@ -118,7 +124,9 @@ function formPhotoSubmitHandler (data) {
 api
     .getUserInfoApi()
     .then(userData => {
-
+        //загрузка данных пользователя на страницу
+        document.querySelector(profileSelectors.name).textContent = userData.name;
+        document.querySelector(profileSelectors.about).textContent = userData.about;
 
         //создание секции
         api
@@ -138,7 +146,6 @@ api
                 cardList.renderItems();
             })
     })
-
 
 
 
