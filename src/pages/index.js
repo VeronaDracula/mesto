@@ -78,11 +78,6 @@ popupDeleteCard.setEventListeners();
 function deleteCardClick(card, cardId) {
     popupDeleteCard.open();
 
-    /*popupDeleteCardElement.addEventListener('click', () => {
-        popupDeleteCard.close();
-        card.remove();
-    });*/
-
     popupDeleteCardElement.addEventListener('click', () => {
         popupDeleteCard.close();
         api.deleteCardApi(cardId)
@@ -98,15 +93,19 @@ function createCard (data, template, handleCardClick, deleteCardClick) {
     return card.generateCard();
 }
 
-const api = new Api({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-27/cards'
-})
+//объект с адресами для запросов
+const url = {
+    urlCards: 'https://mesto.nomoreparties.co/v1/cohort-27/cards',
+    urlUser: 'https://nomoreparties.co/v1/cohort-27/users/me'
+}
+
+
+const api = new Api(url);
 
 //добавление новой карточки на страницу и на сервер
 function formPhotoSubmitHandler (data) {
     api.createCardApi(data)
         .then(data => {
-            console.log(data);
             cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick));
         })
 
@@ -115,18 +114,32 @@ function formPhotoSubmitHandler (data) {
     formCardElement.reset();
 }
 
-//создание секции
+
 api
-    .getCards()
-    .then(data => {
-        const cardList = new Section({
-            items: data,
-            renderer: (item) => {
-                cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick));
-            }
-        }, '.cards');
-        cardList.renderItems();
+    .getUserInfoApi()
+    .then(userData => {
+
+
+        //создание секции
+        api
+            .getCards()
+            .then(data => {
+                const cardList = new Section({
+                    items: data,
+                    renderer: (item) => {
+                        if(item.owner._id === userData._id) {
+                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick));
+                        }
+                        else{
+                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick));
+                        }
+                    }
+                }, '.cards');
+                cardList.renderItems();
+            })
     })
+
+
 
 
 

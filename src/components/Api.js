@@ -5,11 +5,12 @@ export class Api {
         authorization: '8ab69193-abde-425d-8080-68fbeb2c2f47'
     }
     constructor(config) {
-        this.url = config.url;
+        this.urlCards = config.urlCards;
+        this.urlUser = config.urlUser;
     }
 
     getCards () {
-        return fetch(this.url, {
+        return fetch(this.urlCards, {
             headers: this.headers
         }).then(response => {
             if (!response.ok) {
@@ -22,7 +23,7 @@ export class Api {
     }
 
     createCardApi (data) {
-        return fetch(this.url, {
+        return fetch(this.urlCards, {
             headers: this.headers,
             method: 'POST',
             body: JSON.stringify(data)
@@ -36,7 +37,7 @@ export class Api {
     }
 
     deleteCardApi (_id) {
-        return fetch(this.url + '/' + _id, {
+        return fetch(this.urlCards + '/' + _id, {
             headers: this.headers,
             method: 'DELETE',
         }).then(response => {
@@ -44,6 +45,19 @@ export class Api {
                 return response.json()
             }
             return Promise.reject("Произошла ошибка")
+        })
+            .catch(err => console.log(err))
+    }
+
+    getUserInfoApi () {
+        return fetch(this.urlUser, {
+            headers: this.headers
+        }).then(response => {
+            if (!response.ok) {
+                return Promise
+                    .reject({message: 'not ok'})
+            }
+            return response.json()
         })
             .catch(err => console.log(err))
     }

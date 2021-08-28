@@ -4,7 +4,6 @@
     <list default="true" id="6b94d4d6-0f4b-43aa-911a-2e8ab879ed49" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Card.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,14 +87,7 @@
       <workItem from="1629717489276" duration="1574000" />
       <workItem from="1629906462404" duration="9960000" />
       <workItem from="1629970943547" duration="6000" />
-      <workItem from="1629970966941" duration="34626000" />
-    </task>
-    <task id="LOCAL-00039" summary="loading cards">
-      <created>1624716645662</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1624716645662</updated>
+      <workItem from="1629970966941" duration="39561000" />
     </task>
     <task id="LOCAL-00040" summary="delete card">
       <created>1624719369424</created>
@@ -433,14 +425,20 @@
       <option name="project" value="LOCAL" />
       <updated>1630077927417</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="deleteCard and createCard API">
+      <created>1630144992859</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1630144992859</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="review 1 comments" />
     <MESSAGE value="review 1 (hidden validation errors)" />
     <MESSAGE value="review 2" />
     <MESSAGE value="review 3" />
@@ -465,7 +463,8 @@
     <MESSAGE value="popup delete card (html, css and js)" />
     <MESSAGE value="popup edit avatar (html, css and js)" />
     <MESSAGE value="getCards from API" />
-    <option name="LAST_COMMIT_MESSAGE" value="getCards from API" />
+    <MESSAGE value="deleteCard and createCard API" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleteCard and createCard API" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" width="1089" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624807387842">
@@ -476,10 +475,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="522" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1628021179168" />
-    <state x="449" y="0" key="CommitChangelistDialog2" timestamp="1630077926238">
+    <state x="449" y="0" key="CommitChangelistDialog2" timestamp="1630144992398">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="449" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1630077926238" />
+    <state x="449" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1630144992398" />
     <state x="548" y="165" key="FileChooserDialogImpl" timestamp="1629970844706">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
