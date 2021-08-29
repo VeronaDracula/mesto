@@ -5,4 +5,5 @@
 Для подключения разместите родительский каталог на веб-сервере.  
 В проекте используются следующие технологии: Grid Layout, Flexbox.  
 Файловая структура, а так же структура html реализованы по БЭМ.  
-Ссылка для просмотра: https://veronadracula.github.io/mesto/
+Ссылка для просмотра: https://veronadracula.github.io/mesto/  
+https://veronadracula.github.io/mesto/
