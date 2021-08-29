@@ -1,8 +1,8 @@
 //класс работает с аватаром профайла
 export class UserAvatar {
-    constructor(linkSelector) {
-        this._linkSelector = linkSelector;
-        this._avatarImage = document.querySelector(this._linkSelector);
+    constructor(avatarSelector) {
+        this._avatarSelector = avatarSelector;
+        this._avatarImage = document.querySelector(this._avatarSelector);
     }
 
     //принимает новые данные пользователя и добавляет их на страницу

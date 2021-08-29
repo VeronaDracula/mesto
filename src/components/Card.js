@@ -5,6 +5,7 @@ export class Card {
         this._name = data.name;
         this._link = data.link;
         this._id = data._id;
+        this._likes = data.likes;
         this._cardSelector = cardSelector;
         this._deleteCardClick = deleteCardClick;
         this._handleCardClick = handleCardClick;
@@ -27,7 +28,9 @@ export class Card {
 
         const cardTitleElement = this._element.querySelector('.card__title');
         const cardImageElement = this._element.querySelector('.card__image');
+        const cardLikesElement = this._element.querySelector('.card__like-amount');
 
+        cardLikesElement.textContent = this._likes.length;
         cardImageElement.setAttribute('src', this._link);
         cardImageElement.setAttribute('alt', this._name);
         cardTitleElement.textContent = this._name;
@@ -48,9 +51,12 @@ export class Card {
             });
         }
 
-        this._element.querySelector('.card__like').addEventListener('click', (evt) => {
+        /*this._element.querySelector('.card__like').addEventListener('click', (evt) => {
             evt.target.classList.toggle('card__like_active');
-        });
+        });*/
+
+
+
         cardImageElement.addEventListener('click', (event) => {
             this._handleCardClick(this._name, this._link);
         });

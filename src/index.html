@@ -16,7 +16,7 @@
             <section class="profile">
                 <div class="profile__info">
                     <div class="profile__avatar-box">
-                        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="аватар">
+                        <img class="profile__avatar" src="" alt="аватар">
                         <div class="profile__avatar-hover">
                             <button class="profile__edit-avatar-button" type="button"></button>
                         </div>
@@ -41,7 +41,7 @@
                                 <h2 class="card__title"></h2>
                                 <div class="card__like-box">
                                     <button class="card__like" type="button"></button>
-                                    <p class="card__like-amount">0</p>
+                                    <p class="card__like-amount"></p>
                                 </div>
                             </div>
                         </li>
@@ -54,7 +54,7 @@
                                 <h2 class="card__title"></h2>
                                 <div class="card__like-box">
                                     <button class="card__like" type="button"></button>
-                                    <p class="card__like-amount">0</p>
+                                    <p class="card__like-amount"></p>
                                 </div>
                             </div>
                         </li>
@@ -126,7 +126,9 @@
                 <button class="popup__close page__button"></button>
                 <div class="popup__content">
                     <h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
-                    <button type="button" class="form__save form__save_type_delete">Да</button>
+                    <form class="form" name="data" novalidate>
+                        <button type="submit" class="form__save form__save_type_delete">Да</button>
+                    </form>
                 </div>
             </div>
         </section>

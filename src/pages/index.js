@@ -4,7 +4,7 @@ import {dataClasses} from '../utils/constants.js'
 import {Api} from '../components/Api.js'
 import {Card} from '../components/Card.js'
 import {Section} from '../components/Section.js'
-import {Popup} from '../components/Popup.js'
+import {PopupVerification} from '../components/PopupVerification.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js'
@@ -27,7 +27,7 @@ const formCardElement = popupCardElement.querySelector('.form');
 
 //элементы popup_type_delete
 const popupDelete = document.querySelector('.popup_type_delete');
-const popupDeleteCardElement = popupDelete.querySelector('.form__save');
+const popupDeleteCardButton = popupDelete.querySelector('.form__save');
 
 
 //элементы popup_type_edit-avatar
@@ -49,7 +49,11 @@ const profileAvatar = new UserAvatar('.profile__avatar')
 
 //добавление аватара
 function submitEditAvatarForm (data) {
-    profileAvatar.setUserAvatar(data.link)
+    api.createNewUserAvatarApi(data)
+        .then(data => {
+
+            profileAvatar.setUserAvatar(data);
+        })
 
     popupEditAvatarForm.close();
 }
@@ -75,21 +79,22 @@ function handleCardClick(name, link) {
     popupImage.open(name, link);
 }
 
-
-const popupDeleteCard = new Popup('.popup_type_delete');
+const popupDeleteCard = new PopupVerification('.popup_type_delete');
 popupDeleteCard.setEventListeners();
 
 //удаление карточки
 function deleteCardClick(card, cardId) {
     popupDeleteCard.open();
 
-    popupDeleteCardElement.addEventListener('click', () => {
-        popupDeleteCard.close();
-        api.deleteCardApi(cardId)
-            .then(() => {
-                card.remove();
-            })
-    });
+    popupDeleteCard.setFormSubmit(
+        () => {
+            popupDeleteCard.close();
+            api.deleteCardApi(cardId)
+                .then(() => {
+                    card.remove();
+                })
+    })
+
 }
 
 //создание карточки
@@ -98,11 +103,29 @@ function createCard (data, template, handleCardClick, deleteCardClick) {
     return card.generateCard();
 }
 
+/*
+function handleRemoveClick (item) {
+
+    popupApproveDelete.open();
+    popupApproveDelete.setNewFormSubmit(
+        () => {
+            api.deleteCard(item._id)
+                .then(res => {
+                    card.remove();
+                });
+        }
+    )
+}
+*/
+
+
 //объект с адресами для запросов
 const url = {
     urlCards: 'https://mesto.nomoreparties.co/v1/cohort-27/cards',
     urlUser: 'https://nomoreparties.co/v1/cohort-27/users/me',
-    urlUserNewInfo: 'https://mesto.nomoreparties.co/v1/cohort-27/users/me'
+    urlUserNewInfo: 'https://mesto.nomoreparties.co/v1/cohort-27/users/me',
+    urlUserAvatar: 'https://mesto.nomoreparties.co/v1/cohort-27/users/me/avatar',
+    urlLike: 'https://mesto.nomoreparties.co/v1/cohort-27/cards/likes/'
 }
 
 
@@ -121,12 +144,20 @@ function formPhotoSubmitHandler (data) {
 }
 
 
+
+
+
+
+
+
+
 api
     .getUserInfoApi()
     .then(userData => {
         //загрузка данных пользователя на страницу
         document.querySelector(profileSelectors.name).textContent = userData.name;
         document.querySelector(profileSelectors.about).textContent = userData.about;
+        document.querySelector('.profile__avatar').setAttribute('src', userData.avatar);
 
         //создание секции
         api

@@ -8,6 +8,8 @@ export class Api {
         this.urlCards = config.urlCards;
         this.urlUser = config.urlUser;
         this.urlUserNewInfo = config.urlUserNewInfo;
+        this.urlUserAvatar = config.urlUserAvatar;
+        this.urlLike = config.urlLike;
     }
 
     getCards () {
@@ -68,6 +70,47 @@ export class Api {
             headers: this.headers,
             method: 'PATCH',
             body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            return Promise.reject("Произошла ошибка")
+        })
+            .catch(err => console.log(err))
+    }
+
+    createNewUserAvatarApi (data) {
+        return fetch(this.urlUserAvatar, {
+            headers: this.headers,
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            return Promise.reject("Произошла ошибка")
+        })
+            .catch(err => console.log(err))
+    }
+
+    likeApi (_id) {
+        return fetch(this.urlLike + '/' + _id, {
+            headers: this.headers,
+            method: 'PUT',
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            return Promise.reject("Произошла ошибка")
+        })
+            .catch(err => console.log(err))
+    }
+
+    deleteLikedApi (_id) {
+        return fetch(this.urlLike + '/' + _id, {
+            headers: this.headers,
+            method: 'DELETE',
         }).then(response => {
             if (response.ok) {
                 return response.json()
