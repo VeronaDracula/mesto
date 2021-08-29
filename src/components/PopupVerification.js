@@ -17,5 +17,4 @@ export class PopupVerification extends Popup  {
         });
         super.setEventListeners();
     }
-
 }

@@ -43,16 +43,13 @@ const profileSelectors = {
 }
 
 
-
-
 const profileAvatar = new UserAvatar('.profile__avatar')
 
 //добавление аватара
 function submitEditAvatarForm (data) {
     api.createNewUserAvatarApi(data)
         .then(data => {
-
-            profileAvatar.setUserAvatar(data);
+            profileAvatar.setUserAvatar(data.avatar);
         })
 
     popupEditAvatarForm.close();
@@ -102,21 +99,6 @@ function createCard (data, template, handleCardClick, deleteCardClick) {
     const card = new Card(data, template, handleCardClick, deleteCardClick);
     return card.generateCard();
 }
-
-/*
-function handleRemoveClick (item) {
-
-    popupApproveDelete.open();
-    popupApproveDelete.setNewFormSubmit(
-        () => {
-            api.deleteCard(item._id)
-                .then(res => {
-                    card.remove();
-                });
-        }
-    )
-}
-*/
 
 
 //объект с адресами для запросов
