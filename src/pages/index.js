@@ -103,8 +103,8 @@ function deleteCardClick(card, cardId) {
 
 
 //создание карточки
-function createCard (data, template, handleCardClick, deleteCardClick, like, api) {
-    const card = new Card(data, template, handleCardClick, deleteCardClick, like, api);
+function createCard (data, template, handleCardClick, deleteCardClick, like, api, userData) {
+    const card = new Card(data, template, handleCardClick, deleteCardClick, like, api, userData);
     return card.generateCard();
 }
 
@@ -161,10 +161,10 @@ api
                         const like = searchLike (item, userData);
 
                        if(item.owner._id === userData._id) {
-                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick, like, api));
+                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick, like, api, userData));
                         }
                         else{
-                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick, like, api));
+                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick, like, api, userData));
                         }
 
                     }

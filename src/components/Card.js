@@ -1,7 +1,7 @@
 //создание карточки
 
 export class Card {
-    constructor(data, cardSelector, handleCardClick, deleteCardClick, like, api) {
+    constructor(data, cardSelector, handleCardClick, deleteCardClick, like, api, userData) {
         this._name = data.name;
         this._link = data.link;
         this._id = data._id;
@@ -9,10 +9,10 @@ export class Card {
         this._cardSelector = cardSelector;
         this._deleteCardClick = deleteCardClick;
         this._handleCardClick = handleCardClick;
-
         this._like = like;
-
         this._api = api;
+
+        this._userData = userData;
     }
 
     _getTemplate() {
@@ -66,8 +66,10 @@ export class Card {
             this._api
                 .deleteLikedApi(this._id)
                 .then(()=> {
-                    const likeAmount = this._cardLikesElement.textContent - 1;
-                    this._cardLikesElement.textContent = `${likeAmount}`;
+                    const index = this._likes.indexOf(this._userData);
+                    this._likes.splice(index, 1);
+                    console.log(this._likes);
+                    this._cardLikesElement.textContent = this._likes.length;
                     cardLikeElement.classList.remove('card__like_active');
                 })
                 .catch(err => console.log(err))
