@@ -1,7 +1,7 @@
 //создание карточки
 
 export class Card {
-    constructor(data, cardSelector, handleCardClick, deleteCardClick) {
+    constructor(data, cardSelector, handleCardClick, deleteCardClick, handleCardLikeClick, like) {
         this._name = data.name;
         this._link = data.link;
         this._id = data._id;
@@ -9,6 +9,10 @@ export class Card {
         this._cardSelector = cardSelector;
         this._deleteCardClick = deleteCardClick;
         this._handleCardClick = handleCardClick;
+
+        this._handleCardLikeClick = handleCardLikeClick;
+
+        this._like = like;
     }
 
     _getTemplate() {
@@ -29,6 +33,10 @@ export class Card {
         const cardTitleElement = this._element.querySelector('.card__title');
         const cardImageElement = this._element.querySelector('.card__image');
         const cardLikesElement = this._element.querySelector('.card__like-amount');
+
+        if(this._like === true) {
+            this._element.querySelector('.card__like').classList.add('card__like_active');
+        }
 
         cardLikesElement.textContent = this._likes.length;
         cardImageElement.setAttribute('src', this._link);
@@ -51,11 +59,9 @@ export class Card {
             });
         }
 
-        /*this._element.querySelector('.card__like').addEventListener('click', (evt) => {
-            evt.target.classList.toggle('card__like_active');
-        });*/
-
-
+        this._element.querySelector('.card__like').addEventListener('click', (evt) => {
+            this._handleCardLikeClick(this._element, this._id);
+        });
 
         cardImageElement.addEventListener('click', (event) => {
             this._handleCardClick(this._name, this._link);

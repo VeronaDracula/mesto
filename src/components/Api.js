@@ -94,10 +94,9 @@ export class Api {
     }
 
     likeApi (_id) {
-        return fetch(this.urlLike + '/' + _id, {
+        return fetch(this.urlLike + _id, {
             headers: this.headers,
-            method: 'PUT',
-            body: JSON.stringify(data)
+            method: 'PUT'
         }).then(response => {
             if (response.ok) {
                 return response.json()
@@ -108,7 +107,7 @@ export class Api {
     }
 
     deleteLikedApi (_id) {
-        return fetch(this.urlLike + '/' + _id, {
+        return fetch(this.urlLike + _id, {
             headers: this.headers,
             method: 'DELETE',
         }).then(response => {

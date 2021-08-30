@@ -25,10 +25,6 @@ const popupCardElement = document.querySelector('.popup_type_card');
 const cardsElement = document.querySelector('.cards');
 const formCardElement = popupCardElement.querySelector('.form');
 
-//элементы popup_type_delete
-const popupDelete = document.querySelector('.popup_type_delete');
-const popupDeleteCardButton = popupDelete.querySelector('.form__save');
-
 
 //элементы popup_type_edit-avatar
 const popupEditAvatarOpenButtonElement = document.querySelector('.profile__avatar-hover');
@@ -47,10 +43,15 @@ const profileAvatar = new UserAvatar('.profile__avatar')
 
 //добавление аватара
 function submitEditAvatarForm (data) {
+    popupEditAvatarForm.renderLoading(true);
+
     api.createNewUserAvatarApi(data)
         .then(data => {
             profileAvatar.setUserAvatar(data.avatar);
         })
+        .finally(() => {
+            popupEditAvatarForm.renderLoading(false);
+        });
 
     popupEditAvatarForm.close();
 }
@@ -59,10 +60,14 @@ const profileInfo = new UserInfo(profileSelectors);
 
 // функция сохранения данных popup__profile
 function submitEditProfileForm (data) {
+    popupProfileForm.renderLoading(true);
     api.createNewUserInfoApi(data)
         .then(data => {
             profileInfo.setUserInfo(data.name, data.about);
         })
+        .finally(() => {
+            popupProfileForm.renderLoading(false);
+        });
 
     popupProfileForm.close();
 }
@@ -94,9 +99,35 @@ function deleteCardClick(card, cardId) {
 
 }
 
+//ставим и убираем лайк
+function handleCardLikeClick(card, cardId) {
+    const amountCardElement = card.querySelector('.card__like-amount');
+    const cardLikeElement = card.querySelector('.card__like');
+
+    if(!card.querySelector('.card__like_active')) {
+        api
+            .likeApi(cardId)
+            .then(data => {
+                amountCardElement.textContent = data.likes.length;
+                cardLikeElement.classList.toggle('card__like_active');
+
+                }
+            )
+    }
+    else {
+        api
+            .deleteLikedApi(cardId)
+            .then(()=> {
+                const likeAmount = amountCardElement.textContent - 1;
+                amountCardElement.textContent = `${likeAmount}`;
+                cardLikeElement.classList.toggle('card__like_active');
+            })
+    }
+}
+
 //создание карточки
-function createCard (data, template, handleCardClick, deleteCardClick) {
-    const card = new Card(data, template, handleCardClick, deleteCardClick);
+function createCard (data, template, handleCardClick, deleteCardClick, handleCardLikeClick, like) {
+    const card = new Card(data, template, handleCardClick, deleteCardClick, handleCardLikeClick, like);
     return card.generateCard();
 }
 
@@ -115,10 +146,14 @@ const api = new Api(url);
 
 //добавление новой карточки на страницу и на сервер
 function formPhotoSubmitHandler (data) {
+    popupCardForm.renderLoading(true);
     api.createCardApi(data)
         .then(data => {
-            cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick));
+            cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick, handleCardLikeClick));
         })
+        .finally(() => {
+            popupCardForm.renderLoading(false);
+        });
 
     popupCardForm.close();
 
@@ -126,10 +161,10 @@ function formPhotoSubmitHandler (data) {
 }
 
 
-
-
-
-
+//проверка наличия своего лайка
+function searchLike (item, userData) {
+    return item.likes.map(like => like._id).includes(userData._id);
+}
 
 
 
@@ -148,12 +183,16 @@ api
                 const cardList = new Section({
                     items: data,
                     renderer: (item) => {
-                        if(item.owner._id === userData._id) {
-                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick));
+
+                        const like = searchLike (item, userData);
+
+                       if(item.owner._id === userData._id) {
+                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick, handleCardLikeClick, like));
                         }
                         else{
-                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick));
+                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick, handleCardLikeClick, like));
                         }
+
                     }
                 }, '.cards');
                 cardList.renderItems();

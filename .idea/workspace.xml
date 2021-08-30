@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6b94d4d6-0f4b-43aa-911a-2e8ab879ed49" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blocks/card/__delete/card__delete.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/blocks/card/__delete/card__delete.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupVerification.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupVerification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
     </list>
@@ -50,10 +53,47 @@
       <recent name="C:\Users\User\gitWebsormProjects\mesto\blocks\form" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.index">
     <configuration name="index" type="JavascriptDebugType" uri="http://localhost:63342/mesto/src/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="build-and-delpoy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build-and-delpoy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.deploy" />
+        <item itemvalue="npm.build-and-delpoy" />
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -90,14 +130,7 @@
       <workItem from="1629717489276" duration="1574000" />
       <workItem from="1629906462404" duration="9960000" />
       <workItem from="1629970943547" duration="6000" />
-      <workItem from="1629970966941" duration="66636000" />
-    </task>
-    <task id="LOCAL-00043" summary="final">
-      <created>1624735643524</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1624735643524</updated>
+      <workItem from="1629970966941" duration="90519000" />
     </task>
     <task id="LOCAL-00044" summary="img">
       <created>1624735798031</created>
@@ -435,14 +468,20 @@
       <option name="project" value="LOCAL" />
       <updated>1630230445744</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="Avatar API">
+      <created>1630234646426</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1630234646426</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="class Card" />
     <MESSAGE value="class Card and moduls" />
     <MESSAGE value="class Card and modules (comments)" />
     <MESSAGE value="class Card, FormValidator and modules" />
@@ -467,7 +506,8 @@
     <MESSAGE value="deleteCard only me API" />
     <MESSAGE value="newUserInfo API" />
     <MESSAGE value="deleteCard PopupVerification API" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleteCard PopupVerification API" />
+    <MESSAGE value="Avatar API" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avatar API" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" width="1089" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1624807387842">
@@ -478,30 +518,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="522" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1628021179168" />
-    <state x="449" y="0" key="CommitChangelistDialog2" timestamp="1630230445262">
+    <state x="449" y="0" key="CommitChangelistDialog2" timestamp="1630234646008">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="449" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1630230445262" />
+    <state x="449" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1630234646008" />
     <state x="548" y="165" key="FileChooserDialogImpl" timestamp="1629970844706">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="165" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1629970844706" />
-    <state width="1515" height="261" key="GridCell.Tab.0.bottom" timestamp="1629226228639">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1630236921826">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1629226228639" />
-    <state width="1515" height="261" key="GridCell.Tab.0.center" timestamp="1629226228639">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1630236921826" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1630236921826">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1629226228639" />
-    <state width="1515" height="261" key="GridCell.Tab.0.left" timestamp="1629226228639">
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1630236921826" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1630236921826">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1629226228639" />
-    <state width="1515" height="261" key="GridCell.Tab.0.right" timestamp="1629226228639">
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1630236921826" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1630236921826">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1629226228639" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1630236921826" />
     <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1629226228639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -574,10 +614,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="478" y="11" width="579" height="801" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1629042666014" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1629043978163">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1630248873583">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1629043978163" />
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1630248873583" />
     <state x="431" y="145" key="search.everywhere.popup" timestamp="1630230675197">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
