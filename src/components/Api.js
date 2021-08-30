@@ -1,121 +1,95 @@
 
 export class Api {
-    headers = {
-        'Content-Type': 'application/json',
-        authorization: '8ab69193-abde-425d-8080-68fbeb2c2f47'
+
+    constructor(config, authorization) {
+        this.url = config.url;
+        this.authorization = authorization;
+        this.headers = {
+            'Content-Type': 'application/json',
+            'authorization': this.authorization
+        }
     }
-    constructor(config) {
-        this.urlCards = config.urlCards;
-        this.urlUser = config.urlUser;
-        this.urlUserNewInfo = config.urlUserNewInfo;
-        this.urlUserAvatar = config.urlUserAvatar;
-        this.urlLike = config.urlLike;
+
+
+    _getResponseData(res) {
+        if (!res.ok) {
+            return Promise.reject(`Ошибка: ${res.status}`);
+        }
+        return res.json();
     }
 
     getCards () {
-        return fetch(this.urlCards, {
+        return fetch(this.url + 'cards', {
             headers: this.headers
         }).then(response => {
-            if (!response.ok) {
-                return Promise
-                    .reject({message: 'not ok'})
-            }
-            return response.json()
+           return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
+
     }
 
     createCardApi (data) {
-        return fetch(this.urlCards, {
+        return fetch(this.url + 'cards', {
             headers: this.headers,
             method: 'POST',
             body: JSON.stringify(data)
         }).then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return Promise.reject("Произошла ошибка")
+            return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
+
     }
 
     deleteCardApi (_id) {
-        return fetch(this.urlCards + '/' + _id, {
+        return fetch(this.url + 'cards' + '/' + _id, {
             headers: this.headers,
             method: 'DELETE',
         }).then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return Promise.reject("Произошла ошибка")
+            return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
     }
 
     getUserInfoApi () {
-        return fetch(this.urlUser, {
+        return fetch(this.url + 'users/me', {
             headers: this.headers
         }).then(response => {
-            if (!response.ok) {
-                return Promise
-                    .reject({message: 'not ok'})
-            }
-            return response.json()
+            return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
     }
 
     createNewUserInfoApi (data) {
-        return fetch(this.urlUserNewInfo, {
+        return fetch(this.url + 'users/me', {
             headers: this.headers,
             method: 'PATCH',
             body: JSON.stringify(data)
         }).then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return Promise.reject("Произошла ошибка")
+            return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
     }
 
     createNewUserAvatarApi (data) {
-        return fetch(this.urlUserAvatar, {
+        return fetch(this.url + 'users/me/avatar', {
             headers: this.headers,
             method: 'PATCH',
             body: JSON.stringify(data)
         }).then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return Promise.reject("Произошла ошибка")
+            return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
     }
 
     likeApi (_id) {
-        return fetch(this.urlLike + _id, {
+        return fetch(this.url + 'cards/likes/' + _id, {
             headers: this.headers,
             method: 'PUT'
         }).then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return Promise.reject("Произошла ошибка")
+            return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
     }
 
     deleteLikedApi (_id) {
-        return fetch(this.urlLike + _id, {
+        return fetch(this.url + 'cards/likes/' + _id, {
             headers: this.headers,
             method: 'DELETE',
         }).then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return Promise.reject("Произошла ошибка")
+            return this._getResponseData(response)
         })
-            .catch(err => console.log(err))
     }
 }

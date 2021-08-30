@@ -1,7 +1,7 @@
 //создание карточки
 
 export class Card {
-    constructor(data, cardSelector, handleCardClick, deleteCardClick, handleCardLikeClick, like) {
+    constructor(data, cardSelector, handleCardClick, deleteCardClick, like, api) {
         this._name = data.name;
         this._link = data.link;
         this._id = data._id;
@@ -10,9 +10,9 @@ export class Card {
         this._deleteCardClick = deleteCardClick;
         this._handleCardClick = handleCardClick;
 
-        this._handleCardLikeClick = handleCardLikeClick;
-
         this._like = like;
+
+        this._api = api;
     }
 
     _getTemplate() {
@@ -32,13 +32,14 @@ export class Card {
 
         const cardTitleElement = this._element.querySelector('.card__title');
         const cardImageElement = this._element.querySelector('.card__image');
-        const cardLikesElement = this._element.querySelector('.card__like-amount');
+        this._cardLikesElement = this._element.querySelector('.card__like-amount');
+
 
         if(this._like === true) {
             this._element.querySelector('.card__like').classList.add('card__like_active');
         }
 
-        cardLikesElement.textContent = this._likes.length;
+        this._cardLikesElement.textContent = this._likes.length;
         cardImageElement.setAttribute('src', this._link);
         cardImageElement.setAttribute('alt', this._name);
         cardTitleElement.textContent = this._name;
@@ -46,6 +47,32 @@ export class Card {
         return this._element
     }
 
+
+    _cardLikeClick() {
+        const cardLikeElement = this._element.querySelector('.card__like');
+
+        if(!this._element.querySelector('.card__like_active')) {
+            this._api
+                .likeApi(this._id)
+                .then(data => {
+                    this._cardLikesElement.textContent = data.likes.length;
+                    cardLikeElement.classList.add('card__like_active');
+
+                    }
+                )
+                .catch(err => console.log(err))
+        }
+        else {
+            this._api
+                .deleteLikedApi(this._id)
+                .then(()=> {
+                    const likeAmount = this._cardLikesElement.textContent - 1;
+                    this._cardLikesElement.textContent = `${likeAmount}`;
+                    cardLikeElement.classList.remove('card__like_active');
+                })
+                .catch(err => console.log(err))
+        }
+    }
 
 
     //обработчик для кнопок внутри карточки
@@ -60,7 +87,7 @@ export class Card {
         }
 
         this._element.querySelector('.card__like').addEventListener('click', (evt) => {
-            this._handleCardLikeClick(this._element, this._id);
+            this._cardLikeClick();
         });
 
         cardImageElement.addEventListener('click', (event) => {

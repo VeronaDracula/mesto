@@ -3,7 +3,10 @@ export class UserInfo {
     constructor(selectors) {
         this._nameSelector = selectors.name;
         this._aboutSelector = selectors.about;
+        this._avatarSelector = selectors.avatar;
 
+
+        this._avatarImage = document.querySelector(this._avatarSelector);
         this._profileName = document.querySelector(this._nameSelector);
         this._profileAbout = document.querySelector(this._aboutSelector);
     }
@@ -19,5 +22,9 @@ export class UserInfo {
     setUserInfo(nameInput, aboutInput) {
         this._profileName.textContent = nameInput;
         this._profileAbout.textContent = aboutInput;
+    }
+
+    setUserAvatar(linkInput) {
+        this._avatarImage.setAttribute('src', linkInput);
     }
 }

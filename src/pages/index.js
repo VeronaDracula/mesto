@@ -8,7 +8,6 @@ import {PopupVerification} from '../components/PopupVerification.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js'
-import {UserAvatar} from '../components/UserAvatar.js'
 import {FormValidator} from '../components/FormValidator.js'
 
 
@@ -35,11 +34,13 @@ const formEditAvatarElement = popupEditAvatarElement.querySelector('.form');
 //объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе
 const profileSelectors = {
     name: '.profile__name',
-    about: '.profile__about'
+    about: '.profile__about',
+    avatar: '.profile__avatar'
 }
 
 
-const profileAvatar = new UserAvatar('.profile__avatar')
+
+const profileInfo = new UserInfo(profileSelectors);
 
 //добавление аватара
 function submitEditAvatarForm (data) {
@@ -47,16 +48,16 @@ function submitEditAvatarForm (data) {
 
     api.createNewUserAvatarApi(data)
         .then(data => {
-            profileAvatar.setUserAvatar(data.avatar);
+            profileInfo.setUserAvatar(data.avatar);
+            popupEditAvatarForm.close();
         })
+        .catch(err => console.log(err))
+
         .finally(() => {
             popupEditAvatarForm.renderLoading(false);
         });
-
-    popupEditAvatarForm.close();
 }
 
-const profileInfo = new UserInfo(profileSelectors);
 
 // функция сохранения данных popup__profile
 function submitEditProfileForm (data) {
@@ -64,12 +65,12 @@ function submitEditProfileForm (data) {
     api.createNewUserInfoApi(data)
         .then(data => {
             profileInfo.setUserInfo(data.name, data.about);
+            popupProfileForm.close();
         })
+        .catch(err => console.log(err))
         .finally(() => {
             popupProfileForm.renderLoading(false);
         });
-
-    popupProfileForm.close();
 }
 
 
@@ -95,69 +96,43 @@ function deleteCardClick(card, cardId) {
                 .then(() => {
                     card.remove();
                 })
+                .catch(err => console.log(err))
     })
 
 }
 
-//ставим и убираем лайк
-function handleCardLikeClick(card, cardId) {
-    const amountCardElement = card.querySelector('.card__like-amount');
-    const cardLikeElement = card.querySelector('.card__like');
-
-    if(!card.querySelector('.card__like_active')) {
-        api
-            .likeApi(cardId)
-            .then(data => {
-                amountCardElement.textContent = data.likes.length;
-                cardLikeElement.classList.toggle('card__like_active');
-
-                }
-            )
-    }
-    else {
-        api
-            .deleteLikedApi(cardId)
-            .then(()=> {
-                const likeAmount = amountCardElement.textContent - 1;
-                amountCardElement.textContent = `${likeAmount}`;
-                cardLikeElement.classList.toggle('card__like_active');
-            })
-    }
-}
 
 //создание карточки
-function createCard (data, template, handleCardClick, deleteCardClick, handleCardLikeClick, like) {
-    const card = new Card(data, template, handleCardClick, deleteCardClick, handleCardLikeClick, like);
+function createCard (data, template, handleCardClick, deleteCardClick, like, api) {
+    const card = new Card(data, template, handleCardClick, deleteCardClick, like, api);
     return card.generateCard();
 }
 
 
-//объект с адресами для запросов
 const url = {
-    urlCards: 'https://mesto.nomoreparties.co/v1/cohort-27/cards',
-    urlUser: 'https://nomoreparties.co/v1/cohort-27/users/me',
-    urlUserNewInfo: 'https://mesto.nomoreparties.co/v1/cohort-27/users/me',
-    urlUserAvatar: 'https://mesto.nomoreparties.co/v1/cohort-27/users/me/avatar',
-    urlLike: 'https://mesto.nomoreparties.co/v1/cohort-27/cards/likes/'
+    url: 'https://mesto.nomoreparties.co/v1/cohort-27/'
 }
+const authorization = '8ab69193-abde-425d-8080-68fbeb2c2f47';
 
 
-const api = new Api(url);
+const api = new Api(url, authorization);
 
 //добавление новой карточки на страницу и на сервер
 function formPhotoSubmitHandler (data) {
     popupCardForm.renderLoading(true);
     api.createCardApi(data)
         .then(data => {
-            cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick, handleCardLikeClick));
+            cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick));
+            popupCardForm.close();
+
+            formCardElement.reset();
         })
+        .catch(err => console.log(err))
         .finally(() => {
             popupCardForm.renderLoading(false);
         });
 
-    popupCardForm.close();
 
-    formCardElement.reset();
 }
 
 
@@ -172,9 +147,8 @@ api
     .getUserInfoApi()
     .then(userData => {
         //загрузка данных пользователя на страницу
-        document.querySelector(profileSelectors.name).textContent = userData.name;
-        document.querySelector(profileSelectors.about).textContent = userData.about;
-        document.querySelector('.profile__avatar').setAttribute('src', userData.avatar);
+        profileInfo.setUserInfo(userData.name, userData.about);
+        profileInfo.setUserAvatar(userData.avatar);
 
         //создание секции
         api
@@ -187,17 +161,19 @@ api
                         const like = searchLike (item, userData);
 
                        if(item.owner._id === userData._id) {
-                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick, handleCardLikeClick, like));
+                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick, like, api));
                         }
                         else{
-                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick, handleCardLikeClick, like));
+                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick, like, api));
                         }
 
                     }
                 }, '.cards');
                 cardList.renderItems();
             })
+            .catch(err => console.log(err))
     })
+    .catch(err => console.log(err))
 
 
 
