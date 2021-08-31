@@ -50,7 +50,6 @@ export class Card {
 
     _cardLikeClick() {
         const cardLikeElement = this._element.querySelector('.card__like');
-        console.log(this._id)
 
         if(!this._element.querySelector('.card__like_active')) {
             this._api
