@@ -103,8 +103,8 @@ function deleteCardClick(card, cardId) {
 
 
 //создание карточки
-function createCard (data, template, handleCardClick, deleteCardClick, like, api, userData) {
-    const card = new Card(data, template, handleCardClick, deleteCardClick, like, api, userData);
+function createCard (data, template, handleCardClick, deleteCardClick, api, like, userData) {
+    const card = new Card(data, template, handleCardClick, deleteCardClick, api, like, userData);
     return card.generateCard();
 }
 
@@ -122,7 +122,7 @@ function formPhotoSubmitHandler (data) {
     popupCardForm.renderLoading(true);
     api.createCardApi(data)
         .then(data => {
-            cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick));
+            cardsElement.prepend(createCard(data, '.card-template-with-delete', handleCardClick, deleteCardClick, api));
             popupCardForm.close();
 
             formCardElement.reset();
@@ -161,10 +161,10 @@ api
                         const like = searchLike (item, userData);
 
                        if(item.owner._id === userData._id) {
-                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick, like, api, userData));
+                            cardList.addItem(createCard(item, '.card-template-with-delete', handleCardClick, deleteCardClick, api, like,userData));
                         }
                         else{
-                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick, like, api, userData));
+                            cardList.addItem(createCard(item, '.card-template', handleCardClick, deleteCardClick, api, like, userData));
                         }
 
                     }

@@ -1,7 +1,7 @@
 //создание карточки
 
 export class Card {
-    constructor(data, cardSelector, handleCardClick, deleteCardClick, like, api, userData) {
+    constructor(data, cardSelector, handleCardClick, deleteCardClick, api, like, userData) {
         this._name = data.name;
         this._link = data.link;
         this._id = data._id;
@@ -50,6 +50,7 @@ export class Card {
 
     _cardLikeClick() {
         const cardLikeElement = this._element.querySelector('.card__like');
+        console.log(this._id)
 
         if(!this._element.querySelector('.card__like_active')) {
             this._api
