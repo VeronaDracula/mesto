@@ -12,19 +12,6 @@
 - Изменение информации о пользователе  
 - Изменение аватара пользователя 
   
-# Пакеты, которые используются в сборке:
-- Babel  
-- Babel Present Evnvironment  
-- Babel Core  
-- Babel Loader  
-- HTML Webpack Plugin  
-- Clean Webpack Plugin  
-- CSS Loader  
-- Mini CSS Extract Plugin   
-- PostCSS  
-- Autoprefixer   
-- CSSnano  
-
 # Инструкция по запуску:
 - Скачать или склонировать репозиторий  
 - Установить зависимости при помощи npm - npm i  
